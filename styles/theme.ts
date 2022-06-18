@@ -9,7 +9,7 @@ export type colorTheme = {
   };
   background: {
     primary: string;
-    modal: string;
+    secondary: string;
   };
   text: {
     primary: string;
@@ -25,7 +25,8 @@ export type colorTheme = {
 
 const common = {
   primary: {
-    1: '#3949ab',
+    // 1: '#3949ab',
+    1: '#002bff',
   },
   viewPortSize: {
     mobile: `(max-width: ${size.mobile})`,
@@ -42,7 +43,7 @@ export const theme: ThemeType = {
     ...common,
     background: {
       primary: '#2B2B2B',
-      modal: '#2B2B2B',
+      secondary: '#2B2B2B',
     },
     text: {
       primary: '#fffff',
@@ -59,7 +60,7 @@ export const theme: ThemeType = {
     ...common,
     background: {
       primary: '#2B2B2B',
-      modal: '#2B2B2B',
+      secondary: '#2B2B2B',
     },
     text: {
       primary: '#fff',
