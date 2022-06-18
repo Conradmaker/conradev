@@ -1,25 +1,27 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { NavigationBox } from './styles';
 
 export default function Navigation() {
+  const { pathname } = useRouter();
   return (
     <NavigationBox>
       <div className="inner">
         <Link href="/">
-          <a>HOME</a>
+          <a className={pathname === '/' ? 'active' : ''}>HOME</a>
         </Link>
-        <Link href="/">
-          <a>ABOUT</a>
+        <Link href="/about">
+          <a className={pathname === '/about' ? 'active' : ''}>ABOUT</a>
         </Link>
-        <Link href="/">
-          <a>COLLECTION</a>
+        <Link href="/collection">
+          <a className={pathname === '/collection' ? 'active' : ''}>COLLECTION</a>
         </Link>
-        <Link href="/">
-          <a>E-BOOK</a>
+        <Link href="/eBook">
+          <a className={pathname === '/eBook' ? 'active' : ''}>E-BOOK</a>
         </Link>
-        <Link href="/">
-          <a>CONTACT</a>
+        <Link href="/contact">
+          <a className={pathname === '/contact' ? 'active' : ''}>CONTACT</a>
         </Link>
       </div>
     </NavigationBox>

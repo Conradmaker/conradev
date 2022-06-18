@@ -25,6 +25,9 @@ export const HeaderBox = styled.header`
 `;
 
 export const NavigationBox = styled.nav`
+  position: sticky;
+  top: 0;
+  background-color: #fff;
   border-top: 1px solid #ededed;
   border-bottom: 1px solid #ededed;
   font-weight: 400;
@@ -35,7 +38,11 @@ export const NavigationBox = styled.nav`
     display: flex;
     align-items: center;
     a {
-      padding: 4px 4px 4px 0;
+      padding: 4px 4px 4px 4px;
+    }
+    a.active {
+      color: #fff;
+      background: ${({ theme }) => theme.primary[1]};
     }
     a + a {
       margin-left: 28px;

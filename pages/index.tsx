@@ -1,20 +1,16 @@
 import type { NextPage } from 'next';
 import Divider from '../components/common/Divider';
-import Header from '../components/common/Header';
-import Navigation from '../components/common/Navigation';
 import PostSummary from '../components/Post/PostSummary';
 import MainPost from '../components/Post/MainPost';
 import { MainPage } from './styles';
 import AboutMe from '../components/Main/AboutMe';
 import Topic from '../components/Main/Topic';
-import Footer from '../components/common/Footer';
+import Layout from '../components/common/Layout';
 
 const Home: NextPage = () => {
   return (
-    <>
-      <Header />
+    <Layout>
       <MainPage className="inner">
-        <Navigation />
         <MainPost />
         <div className="bottom_section">
           <div className="left">
@@ -38,8 +34,7 @@ const Home: NextPage = () => {
           </aside>
         </div>
       </MainPage>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 
