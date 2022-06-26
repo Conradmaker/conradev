@@ -27,7 +27,7 @@ export const HeaderBox = styled.header`
 export const NavigationBox = styled.nav`
   position: sticky;
   top: 0;
-  background-color: #fff;
+  background-color: #ffffff;
   border-top: 1px solid #ededed;
   border-bottom: 1px solid #ededed;
   font-weight: 400;
