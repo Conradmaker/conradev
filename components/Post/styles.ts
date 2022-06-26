@@ -98,3 +98,9 @@ export const PostSummarySmall = styled.article`
     opacity: 0.7;
   }
 `;
+
+export const CommentCT = styled.div`
+  max-width: 720px;
+  margin: 0 auto;
+  margin-top: 120px;
+`;

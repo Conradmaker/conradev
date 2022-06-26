@@ -11,7 +11,7 @@ import { nord } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import Layout from '../../components/common/Layout';
 import { PostCT } from './styles';
 import PostSummary from 'components/Post/PostSummary';
-import PublishInfo from 'components/Post/PublishInfo';
+import Comment from 'components/Post/Comment';
 
 const CodeBlock = {
   code({ inline, className, children, ...props }: SyntaxHighlighterProps) {
@@ -54,6 +54,7 @@ export default function Post() {
         >
           {content}
         </ReactMarkdown>
+        <Comment />
       </PostCT>
     </Layout>
   );
