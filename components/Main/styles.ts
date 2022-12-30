@@ -12,17 +12,14 @@ export const AboutMeCT = styled.div`
       margin-top: 12px;
     }
     li {
-      border-radius: 4px;
-      border: 1px solid #aaa;
-      padding: 12px;
+      padding: 8px 0;
       display: flex;
       align-items: center;
-
       color: #888;
       font-weight: 300;
       font-size: 14px;
       svg {
-        font-size: 20px;
+        font-size: 16px;
         margin-right: 12px;
       }
     }
@@ -35,7 +32,7 @@ export const TopicItem = styled.div`
   align-items: center;
   justify-content: space-between;
   & > p {
-    font-weight: 600;
+    font-weight: 400;
     font-size: 18px;
   }
   .pill {

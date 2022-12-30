@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <HeaderBox className="inner">
       <Link href="/">
-        <a className="logo">Conradev</a>
+        <span className="logo">Conradev</span>
       </Link>
       <ul className="theme_switch">
         <li>어두운화면</li>

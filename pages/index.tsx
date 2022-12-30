@@ -22,15 +22,19 @@ const Home: NextPage = () => {
             </ul>
           </div>
           <aside className="right">
-            <Divider label="ABOUT" />
-            <AboutMe />
-            <Divider label="FEATURED" />
-            <PostSummary.Small />
-            <PostSummary.Small />
             <Divider label="TOPICS" />
-            <Topic />
-            <Topic />
-            <Topic />
+            <ul className="topics">
+              <Topic />
+              <Topic />
+              <Topic />
+            </ul>
+            {/* <Divider label="ABOUT" /> */}
+            {/* <AboutMe /> */}
+            <Divider label="FEATURED" />
+            <ul className="feature_post">
+              <PostSummary.Small />
+              <PostSummary.Small />
+            </ul>
           </aside>
         </div>
       </MainPage>

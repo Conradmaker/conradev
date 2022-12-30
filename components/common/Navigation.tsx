@@ -8,20 +8,20 @@ export default function Navigation() {
   return (
     <NavigationBox>
       <div className="inner">
-        <Link href="/">
-          <a className={pathname === '/' ? 'active' : ''}>HOME</a>
+        <Link className={pathname === '/' ? 'active' : ''} href="/">
+          HOME
         </Link>
-        <Link href="/about">
-          <a className={pathname === '/about' ? 'active' : ''}>ABOUT</a>
+        <Link className={pathname.includes('/about') ? 'active' : ''} href="/about">
+          ABOUT
         </Link>
-        <Link href="/collection">
-          <a className={pathname === '/collection' ? 'active' : ''}>COLLECTION</a>
+        <Link className={pathname.includes('/series') ? 'active' : ''} href="/series">
+          SERIES
         </Link>
-        <Link href="/eBook">
-          <a className={pathname === '/eBook' ? 'active' : ''}>E-BOOK</a>
+        <Link className={pathname.includes('/eBook') ? 'active' : ''} href="/eBook">
+          E-BOOK
         </Link>
-        <Link href="/contact">
-          <a className={pathname === '/contact' ? 'active' : ''}>CONTACT</a>
+        <Link className={pathname.includes('/contact') ? 'active' : ''} href="/contact">
+          CONTACT
         </Link>
       </div>
     </NavigationBox>

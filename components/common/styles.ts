@@ -6,8 +6,9 @@ export const HeaderBox = styled.header`
   justify-content: space-between;
   height: 80px;
   .logo {
-    font-size: 32px;
-    font-family: 'Baloo2';
+    font-size: 28px;
+    font-weight: bold;
+    /* font-family: 'Baloo2'; */
   }
   & > ul {
     display: flex;
@@ -33,16 +34,20 @@ export const NavigationBox = styled.nav`
   font-weight: 400;
   font-size: 12px;
   height: 56px;
+  z-index: 99;
   .inner {
     height: 100%;
     display: flex;
     align-items: center;
     a {
       padding: 4px 4px 4px 4px;
+      letter-spacing: 1px;
     }
     a.active {
-      color: #fff;
-      background: ${({ theme }) => theme.primary[1]};
+      /* color: #fff;
+      background: ${({ theme }) => theme.primary[1]}; */
+      color: ${({ theme }) => theme.primary[1]};
+      font-weight: bold;
     }
     a + a {
       margin-left: 28px;
@@ -54,7 +59,8 @@ export const DividerBox = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 18px;
+  margin-top: 24px;
   span {
     font-size: 12px;
     font-weight: 500;
@@ -84,4 +90,12 @@ export const FooterCT = styled.footer`
       justify-content: center;
     }
   }
+`;
+
+export const PillBox = styled.div`
+  padding: 2px 4px;
+  color: ${({ theme }) => theme.primary[1]};
+  display: flex;
+  align-items: center;
+  font-size: 14px;
 `;

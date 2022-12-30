@@ -5,12 +5,41 @@ export const PostCT = styled.main`
   img.thumb {
     max-width: 1200px;
     max-height: 729px;
-    margin: 52px auto;
+    margin: 0 auto;
+    margin-top: 60px;
+  }
+  .info {
+    span,
+    a {
+      font-weight: 400;
+      font-size: 16px;
+      color: #999;
+      strong {
+        font-weight: bold;
+        color: ${({ theme }) => theme.primary[1]};
+      }
+    }
+    a {
+      cursor: pointer;
+    }
+  }
+  .viewer {
+    position: relative;
+    display: flex;
+    aside {
+      flex: 1;
+      margin-top: 120px;
+      position: sticky;
+      top: 150px;
+      height: 100%;
+      margin-left: 100px;
+      /* width: 240px; */
+    }
   }
   .markdown_view {
-    max-width: 720px;
+    width: 720px;
     margin: 0 auto;
-    margin-top: 120px;
+    margin-top: 60px;
     line-height: 1.3;
     code {
       background-color: #e2f1f8;

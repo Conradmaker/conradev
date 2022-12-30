@@ -13,7 +13,7 @@ export default function Comment() {
           url: 'https://conradev.me',
           identifier: (route.query.id as string) || 'null',
           title: '123123123',
-          language: 'ko', //e.g. for Traditional Chinese (Taiwan)
+          language: 'ko',
         }}
       />
     </CommentCT>

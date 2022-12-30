@@ -12,6 +12,7 @@ module.exports = {
   ],
   plugins: ['prettier', '@typescript-eslint'],
   rules: {
+    '@next/next/no-img-element': 'off',
     'prettier/prettier': [
       'error',
       {
