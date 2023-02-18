@@ -1,11 +1,18 @@
 import React from 'react';
 import { TopicItem } from './styles';
 
-export default function Topic() {
+type TopicProps = {
+  data: {
+    id: number;
+    name: string;
+    cnt: number;
+  };
+};
+export default function Topic({ data }: TopicProps) {
   return (
-    <TopicItem>
-      <p># 프론트엔드 Front-End</p>
-      <div className="pill">11 Posts</div>
+    <TopicItem className="active">
+      <p># {data.name}</p>
+      <small>{data.cnt}</small>
     </TopicItem>
   );
 }

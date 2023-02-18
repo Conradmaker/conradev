@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 export const MainPage = styled.main`
   .bottom_section {
     display: flex;
+    position: relative;
     gap: 68px;
     .left {
       flex: 2.2;
@@ -11,12 +12,18 @@ export const MainPage = styled.main`
       }
     }
     .right {
+      align-self: flex-start;
+      position: sticky;
+      top: 80px;
       flex: 1;
       .about_me {
         margin-bottom: 64px;
       }
       .topics {
         margin-bottom: 52px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 20px;
       }
       .post_summary {
         margin-bottom: 52px;
@@ -102,7 +109,7 @@ export const SeriesPage = styled.main`
       flex: 1;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 84px 28px;
+      gap: 72px 28px;
       li {
       }
     }

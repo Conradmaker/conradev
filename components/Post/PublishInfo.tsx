@@ -8,7 +8,7 @@ import {
 } from './styles';
 
 function PostDate() {
-  return <PostDateSpan className="post_date">JUN 28, 2022</PostDateSpan>;
+  return <PostDateSpan className="post_date">2022년 12월 31일</PostDateSpan>;
 }
 function PostReadCount() {
   return <PostReadCntSpan className="post_read_count">22 MIN READ</PostReadCntSpan>;

@@ -3,9 +3,9 @@ import Divider from '../components/common/Divider';
 import PostSummary from '../components/Post/PostSummary';
 import MainPost from '../components/Post/MainPost';
 import { MainPage } from './styles';
-import AboutMe from '../components/Main/AboutMe';
 import Topic from '../components/Main/Topic';
 import Layout from '../components/common/Layout';
+import { topicMocks } from 'data/mocks/topics';
 
 const Home: NextPage = () => {
   return (
@@ -19,14 +19,22 @@ const Home: NextPage = () => {
               <PostSummary.Normal />
               <PostSummary.Normal />
               <PostSummary.Normal />
+              <PostSummary.Normal />
+              <PostSummary.Normal />
+              <PostSummary.Normal />
+              <PostSummary.Normal />
+              <PostSummary.Normal />
+              <PostSummary.Normal />
+              <PostSummary.Normal />
+              <PostSummary.Normal />
             </ul>
           </div>
           <aside className="right">
             <Divider label="TOPICS" />
             <ul className="topics">
-              <Topic />
-              <Topic />
-              <Topic />
+              {topicMocks.map(v => (
+                <Topic data={v} key={v.id} />
+              ))}
             </ul>
             {/* <Divider label="ABOUT" /> */}
             {/* <AboutMe /> */}

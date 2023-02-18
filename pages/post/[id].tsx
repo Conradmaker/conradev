@@ -34,25 +34,63 @@ const CodeBlock = {
 
 export default function Post() {
   const [content, setContent] = useState('');
-  const [idList, setIdList] = useState<{ idx: number; level: number; id: string }[]>([]);
+  const [idList, setIdList] = useState<
+    { idx: number; level: number; id: string; offset: number; active: boolean }[]
+  >([]);
   useEffect(() => {
     axios
-      .get('https://b7093273-9a06-4130-a5c4-3156058b6f5d.mock.pstmn.io/md/1')
+      .get('https://9cdf9241-d3b0-4af1-b55e-00a462bc5b12.mock.pstmn.io/md/2')
       .then(res => setContent(res.data));
   }, []);
   useEffect(() => {
-    const list = document.querySelector('.markdown_view');
+    const list = document.querySelector('.markdown-body');
     const arr = list?.querySelectorAll(
       'h1,h2,h3,h4,h5'
     ) as NodeListOf<HTMLHeadingElement>;
     if (arr) {
-      let res: { idx: number; level: number; id: string }[] = [];
+      let res: {
+        idx: number;
+        level: number;
+        id: string;
+        offset: number;
+        active: boolean;
+      }[] = [];
       arr.forEach((v, i) => {
-        res = [...res, { idx: i, level: +v.tagName.charAt(1), id: v.id }];
+        const position = v.offsetTop + window.innerHeight;
+        res = [
+          ...res,
+          {
+            idx: i,
+            level: +v.tagName.charAt(1),
+            id: v.id,
+            offset: position,
+            active: false,
+          },
+        ];
       });
       setIdList(res);
     }
   }, [content]);
+  useEffect(() => {
+    const onScroll = () => {
+      const { scrollY } = window;
+      idList.forEach((v, i) => {
+        if (scrollY > v.offset) {
+          setIdList(prev =>
+            prev.map((v, idx) => {
+              if (idx === i) return { ...v, active: true };
+              return { ...v, active: false };
+            })
+          );
+        }
+      });
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [idList]);
+
   return (
     <Layout>
       <PostCT>
@@ -73,9 +111,10 @@ export default function Post() {
         <div className="viewer">
           <aside />
           <ReactMarkdown
-            className="markdown_view"
+            className="markdown-body"
             rehypePlugins={[rehypeRaw, rehypeSlug]}
             remarkPlugins={[gfm]}
+            // disallowedElements={['aside']}
             components={CodeBlock}
           >
             {content}

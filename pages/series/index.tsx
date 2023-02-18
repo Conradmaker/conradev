@@ -14,10 +14,10 @@ export default function index() {
               <strong>TOPICS</strong>
               <ul>
                 <li className="active">ALL</li>
-                <li>React</li>
-                <li>Vue</li>
-                <li>React</li>
-                <li>React</li>
+                <li># React</li>
+                <li># Vue</li>
+                <li># React</li>
+                <li># React</li>
               </ul>
             </div>
           </aside>

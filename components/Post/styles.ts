@@ -151,6 +151,7 @@ export const CommentCT = styled.div`
 `;
 
 export const HeadingAnchorBox = styled.a`
+  cursor: pointer;
   display: block;
   color: #888;
   line-height: 1.3;
@@ -158,22 +159,24 @@ export const HeadingAnchorBox = styled.a`
   font-size: 14px;
   font-weight: 300;
   margin-top: 8px;
+  font-family: 'Nanum Gothic', 'sans-serif';
   &.heading_1 {
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 2px;
-    color: #888;
+    color: #000;
+    font-size: 16px;
   }
   &.heading_2 {
     font-weight: 400;
     text-indent: 12px;
     margin-top: 4px;
-    color: #888;
+    color: #666;
   }
   &.heading_3 {
     text-indent: 24px;
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 2px;
-    color: #999;
+    color: #888;
   }
   &.heading_4 {
     text-indent: 36px;
@@ -186,5 +189,9 @@ export const HeadingAnchorBox = styled.a`
     font-size: 12px;
     margin-top: 2px;
     color: #999;
+  }
+  &.active {
+    text-decoration: underline;
+    color: #000;
   }
 `;

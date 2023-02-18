@@ -28,24 +28,31 @@ export const AboutMeCT = styled.div`
 
 export const TopicItem = styled.div`
   display: flex;
-  padding: 10px 0;
+  padding: 8px 0px;
   align-items: center;
   justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 99px;
   & > p {
-    font-weight: 400;
-    font-size: 18px;
+    font-weight: 300;
+    font-size: 15px;
   }
-  .pill {
+  small {
     font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 10px;
-    border: 1px solid #ededed;
-    border-radius: 99px;
+    color: #999;
   }
   cursor: pointer;
   &:hover {
     opacity: 0.7;
+  }
+  &.active {
+    border-color: ${({ theme }) => theme.primary[1]};
+    & > p,
+    small {
+      font-weight: 400;
+      color: ${({ theme }) => theme.primary[1]};
+    }
   }
 `;

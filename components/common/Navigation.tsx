@@ -9,7 +9,7 @@ export default function Navigation() {
     <NavigationBox>
       <div className="inner">
         <Link className={pathname === '/' ? 'active' : ''} href="/">
-          HOME
+          전체글
         </Link>
         <Link className={pathname.includes('/about') ? 'active' : ''} href="/about">
           ABOUT
