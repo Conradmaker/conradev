@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { breakPoint } from 'styles/theme';
 
 export const SimpleListItem = styled.div`
   display: flex;
@@ -44,6 +45,34 @@ export const SimpleListItem = styled.div`
       max-height: 16vw;
       width: 100%;
       object-fit: cover;
+    }
+  }
+  @media ${breakPoint.mobile} {
+    gap: 8px;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    margin-bottom: 48px;
+    article {
+      h2 {
+        font-size: 26px;
+        line-height: 1.4;
+      }
+      p {
+        font-size: 14px;
+        margin-top: 8px;
+        .dot {
+          margin: 6px;
+        }
+      }
+    }
+    .img_wrapper {
+      flex: 1;
+      width: 100%;
+      img {
+        max-height: 44vw;
+        width: 100%;
+        object-fit: cover;
+      }
     }
   }
 `;
@@ -121,6 +150,49 @@ export const PostItemBox = styled.div`
           }
           svg {
             margin-bottom: 2px;
+          }
+        }
+      }
+    }
+  }
+  @media ${breakPoint.mobile} {
+    margin: 36px 0;
+    padding-bottom: 36px;
+    .article {
+      h2 {
+        font-size: 20px;
+        font-weight: 600;
+      }
+      p.summary {
+        font-size: 14px;
+        margin-top: 8px;
+        margin-bottom: 32px;
+        text-align: justify;
+      }
+      .info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        ul.tag_list {
+          align-self: flex-end;
+          gap: 8px;
+          .tag {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 2px;
+            font-weight: 400;
+          }
+        }
+        ul.detail {
+          align-self: flex-end;
+          li {
+            font-size: 12px;
+            span {
+              font-size: 13px;
+            }
+            svg {
+              margin-bottom: 1px;
+            }
           }
         }
       }

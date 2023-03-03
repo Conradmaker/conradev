@@ -15,7 +15,7 @@ export default function Insight() {
               <FcIdea />
             </h1>
           </div>
-          <p>매주 연재되는 지극히 주관적으로 세상을 바라보는 시점의 글</p>
+          <p>주관적인 시점으로 세상을 바라보는 글</p>
         </div>
         <div className="content">
           <ul>

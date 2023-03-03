@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { breakPoint } from 'styles/theme';
 
 export const HeaderBox = styled.header`
   display: flex;
@@ -9,7 +10,6 @@ export const HeaderBox = styled.header`
   .logo {
     font-size: 28px;
     font-weight: bold;
-    /* font-family: 'Baloo2'; */
     svg {
       width: 132px;
       height: 40px;
@@ -26,6 +26,14 @@ export const HeaderBox = styled.header`
     }
     li + li {
       margin-left: 14px;
+    }
+  }
+  @media ${breakPoint.mobile} {
+    padding: 0 20px;
+    height: 52px;
+    margin-top: 0px;
+    .logo svg {
+      width: 120px;
     }
   }
 `;
@@ -70,6 +78,23 @@ export const NavigationBox = styled.nav`
       color: ${({ theme }) => theme.primary[1]};
     }
   }
+  @media ${breakPoint.mobile} {
+    padding: 0 16px;
+    .inner {
+      /* background-color: #fffaaa; */
+      height: 40px;
+      nav {
+        /* justify-content: center; */
+        font-size: 14px;
+        a + a {
+          margin-left: 12px;
+        }
+      }
+    }
+    .search {
+      display: none;
+    }
+  }
 `;
 export const FooterCT = styled.footer`
   font-size: 16px;
@@ -89,5 +114,12 @@ export const FooterCT = styled.footer`
       display: flex;
       justify-content: center;
     }
+  }
+  @media ${breakPoint.mobile} {
+    padding: 0 20px;
+    margin-top: 100px;
+    padding-bottom: 24px;
+    font-size: 12px;
+    font-weight: 400;
   }
 `;

@@ -30,7 +30,7 @@ const CodeBlock: Partial<
   },
   img: props => {
     console.log(props.src);
-    return <img src={`http://localhost:1337${props.src}`} alt="" />;
+    return <img src={`${process.env.NEXT_PUBLIC_SERVER_HOST}${props.src}`} alt="" />;
   },
   code({ inline, className, children, ...props }: CodeProps) {
     const match = /language-(\w+)/.exec(className || '');
@@ -51,7 +51,7 @@ export default function Post() {
   const { idList } = useHeadAnchor([content]);
   useEffect(() => {
     axios
-      .get('http://localhost:1337/api/posts/3?populate=*')
+      .get(`${process.env.NEXT_PUBLIC_SERVER_HOST}/api/posts/3?populate=*`)
       .then(res => setContent(res.data));
   }, []);
   console.log(content);
@@ -80,7 +80,7 @@ export default function Post() {
           </div>
           <img
             src={
-              'http://localhost:1337' +
+              process.env.NEXT_PUBLIC_SERVER_HOST +
               content?.data?.attributes?.cover.data.attributes.url
             }
             alt="s"

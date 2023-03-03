@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { HiOutlineCalendar, HiOutlineClock, HiOutlineLink } from 'react-icons/hi';
 import { SpecialComponents } from 'react-markdown/lib/ast-to-react';
 import { NormalComponents } from 'react-markdown/lib/complex-types';
-import { InsightPostPage } from './styles';
+import { InsightPostPage } from '../post/styles';
 const CodeBlock: Partial<
   Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents
 > = {
@@ -23,7 +23,7 @@ const CodeBlock: Partial<
   },
   img: props => {
     console.log(props.src);
-    return <img src={`http://localhost:1337${props.src}`} alt="" />;
+    return <img src={`${process.env.NEXT_PUBLIC_SERVER_HOST}${props.src}`} alt="" />;
   },
 };
 
@@ -31,7 +31,7 @@ export default function Post() {
   const [content, setContent] = useState('');
   useEffect(() => {
     axios
-      .get('http://localhost:1337/api/posts/3?populate=*')
+      .get(`${process.env.NEXT_PUBLIC_SERVER_HOST}/api/posts/3?populate=*`)
       .then(res => setContent(res.data));
   }, []);
   console.log(content);
