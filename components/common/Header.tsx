@@ -23,8 +23,8 @@ export default function Header() {
         </span>
       </Link>
       <ul className="theme_switch">
-        <li>어두운화면</li>
-        <li>밝은화면</li>
+        {/* <li>어두운화면</li>
+        <li>밝은화면</li> */}
       </ul>
     </HeaderBox>
   );

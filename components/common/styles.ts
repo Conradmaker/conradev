@@ -46,7 +46,7 @@ export const NavigationBox = styled.nav`
     nav {
       flex: 1;
       font-weight: 500;
-      font-size: 14px;
+      font-size: 15px;
       height: 100%;
       display: flex;
       align-items: center;
@@ -55,10 +55,8 @@ export const NavigationBox = styled.nav`
         letter-spacing: 1px;
       }
       a.active {
-        /* color: #fff;
-      background: ${({ theme }) => theme.primary[1]}; */
         color: ${({ theme }) => theme.primary[1]};
-        font-weight: bold;
+        font-weight: 600;
       }
       a + a {
         margin-left: 28px;

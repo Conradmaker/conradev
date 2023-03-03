@@ -87,7 +87,6 @@ export const PostItemBox = styled.div`
       ul.tag_list {
         display: flex;
         gap: 12px;
-        flex: auto;
         .tag {
           display: flex;
           align-items: center;

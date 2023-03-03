@@ -1,6 +1,9 @@
 import styled from '@emotion/styled';
-
-export const PostCT = styled.main`
+import localFont from 'next/font/local';
+const RIDI = localFont({
+  src: '../../public/fonts/RIDIBatang.otf',
+});
+export const PostCT = styled.article`
   padding: 120px 0;
   max-width: 1000px;
   margin: 0 auto;
@@ -22,10 +25,10 @@ export const PostCT = styled.main`
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #f7f7fe;
+        background-color: #fafafa;
         font-size: 16px;
         padding: 6px 12px;
-        border-radius: 6px;
+        border-radius: 4px;
         color: #666;
         font-weight: 500;
         transition: all 0.2s;
@@ -177,6 +180,88 @@ export const PostCT = styled.main`
       object-fit: contain;
       object-position: center;
       display: block;
+    }
+  }
+`;
+
+export const InsightPostPage = styled(PostCT)`
+  max-width: 660px;
+  text-align: center;
+  .inner > .title {
+    font-size: 40px;
+    font-weight: 700;
+  }
+  .inner > .detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    color: #888;
+    li {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+  }
+  font-family: ${RIDI.style.fontFamily} !important;
+  .markdown-body {
+    * {
+      font-family: ${RIDI.style.fontFamily} !important;
+      text-align: justify;
+    }
+    padding-top: 40px;
+    margin-bottom: 120px;
+    margin: 0 auto;
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin: 1.5rem 0 0.5rem;
+      font-weight: inherit;
+      line-height: 1.42;
+    }
+    h1 {
+      font-weight: 500;
+      margin-top: 0;
+      font-size: 2.5rem;
+    }
+    h2 {
+      font-size: 1.7rem;
+    }
+    h3 {
+      font-size: 1.3rem;
+    }
+    h4 {
+      font-size: 1.1rem;
+    }
+    h5 {
+      font-size: 0.9rem;
+    }
+    h6 {
+      font-size: 0.8rem;
+    }
+    blockquote {
+      background-color: #fafafa;
+      margin: 24px 8px;
+      padding: 12px 12px;
+      color: #555;
+      border-left: 0.3em solid #7468fb;
+      p {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+    p {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: #111;
+    }
+    strong {
+      font-weight: 900;
+      color: #000;
+      /* text-decoration: underline; */
     }
   }
 `;
