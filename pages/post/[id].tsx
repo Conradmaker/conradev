@@ -4,24 +4,38 @@ import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import {
-  Prism as SyntaxHighlighter,
-  SyntaxHighlighterProps,
-} from 'react-syntax-highlighter';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import rehypeSlug from 'rehype-slug';
-import { nord } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import Layout from '../../components/common/Layout';
 import { PostCT } from './styles';
-import PostSummary from 'components/Post/PostSummary';
-import Comment from 'components/Post/Comment';
-import Link from 'next/link';
 import HeadingAnchor from 'components/Post/HeadingAnchor';
+import { NormalComponents } from 'react-markdown/lib/complex-types';
+import { SpecialComponents } from 'react-markdown/lib/ast-to-react';
+import { CodeProps } from 'react-markdown/lib/ast-to-react';
+import useHeadAnchor from 'hooks/useHeadAnchor';
+import { HiOutlineCalendar, HiOutlineClock, HiOutlineLink } from 'react-icons/hi';
 
-const CodeBlock = {
-  code({ inline, className, children, ...props }: SyntaxHighlighterProps) {
+const CodeBlock: Partial<
+  Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents
+> = {
+  a: props => {
+    console.log(props);
+    return (
+      <a href={props.href} target="_blank" rel="noreferrer">
+        <HiOutlineLink size={16} />
+        {props.children[0]}
+      </a>
+    );
+  },
+  img: props => {
+    console.log(props.src);
+    return <img src={`http://localhost:1337${props.src}`} alt="" />;
+  },
+  code({ inline, className, children, ...props }: CodeProps) {
     const match = /language-(\w+)/.exec(className || '');
     return !inline && match ? (
-      <SyntaxHighlighter style={nord} language={match[1]} PreTag="div" {...props}>
+      <SyntaxHighlighter style={materialOceanic} language={match[1]} {...props}>
         {String(children).replace(/\n$/, '')}
       </SyntaxHighlighter>
     ) : (
@@ -34,76 +48,41 @@ const CodeBlock = {
 
 export default function Post() {
   const [content, setContent] = useState('');
-  const [idList, setIdList] = useState<
-    { idx: number; level: number; id: string; offset: number; active: boolean }[]
-  >([]);
+  const { idList } = useHeadAnchor([content]);
   useEffect(() => {
     axios
-      .get('https://9cdf9241-d3b0-4af1-b55e-00a462bc5b12.mock.pstmn.io/md/2')
+      .get('http://localhost:1337/api/posts/3?populate=*')
       .then(res => setContent(res.data));
   }, []);
-  useEffect(() => {
-    const list = document.querySelector('.markdown-body');
-    const arr = list?.querySelectorAll(
-      'h1,h2,h3,h4,h5'
-    ) as NodeListOf<HTMLHeadingElement>;
-    if (arr) {
-      let res: {
-        idx: number;
-        level: number;
-        id: string;
-        offset: number;
-        active: boolean;
-      }[] = [];
-      arr.forEach((v, i) => {
-        const position = v.offsetTop + window.innerHeight;
-        res = [
-          ...res,
-          {
-            idx: i,
-            level: +v.tagName.charAt(1),
-            id: v.id,
-            offset: position,
-            active: false,
-          },
-        ];
-      });
-      setIdList(res);
-    }
-  }, [content]);
-  useEffect(() => {
-    const onScroll = () => {
-      const { scrollY } = window;
-      idList.forEach((v, i) => {
-        if (scrollY > v.offset) {
-          setIdList(prev =>
-            prev.map((v, idx) => {
-              if (idx === i) return { ...v, active: true };
-              return { ...v, active: false };
-            })
-          );
-        }
-      });
-    };
-    window.addEventListener('scroll', onScroll);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-    };
-  }, [idList]);
+  console.log(content);
 
   return (
     <Layout>
       <PostCT>
         <div className="inner">
+          <h1 className="title">{content?.data?.attributes.title}</h1>
           <div className="info">
-            <Link href="/">
-              IN <strong>시리즈</strong> —&nbsp;
-            </Link>
-            <span>JUN 28, 2022</span>
+            <ul className="category_list">
+              {content?.data?.attributes?.categories?.data.map(v => (
+                <li>{v.attributes.name}</li>
+              ))}
+            </ul>
+            <ul className="detail">
+              <li>
+                <HiOutlineClock />
+                <span>13분 분량</span>
+              </li>
+              <li>
+                <HiOutlineCalendar />
+                <span>2023년 03월 03일</span>
+              </li>
+            </ul>
           </div>
-          <PostSummary.Large />
           <img
-            src="https://reboot.studio/blog/content/images/2021/02/react-folder-structure-1.png"
+            src={
+              'http://localhost:1337' +
+              content?.data?.attributes?.cover.data.attributes.url
+            }
             alt="s"
             className="thumb"
           />
@@ -117,7 +96,7 @@ export default function Post() {
             // disallowedElements={['aside']}
             components={CodeBlock}
           >
-            {content}
+            {content?.data?.attributes.blocks[0].body}
           </ReactMarkdown>
           <aside>
             <ul>
@@ -127,7 +106,6 @@ export default function Post() {
             </ul>
           </aside>
         </div>
-        <Comment />
       </PostCT>
     </Layout>
   );

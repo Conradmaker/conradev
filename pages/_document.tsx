@@ -27,7 +27,6 @@ class MyDocument extends Document {
             content="https://i.ibb.co/G5DwjyP/linkedin-profile-image2-removebg-preview.png"
           />
           <meta property="og:url" content="https://developic.shop" />
-
           <meta property="twitter:card" content="summary" />
           <meta property="twitter:site" content="DeveloPic" />
           <meta property="twitter:title" content="DeveloPic" />
@@ -41,14 +40,17 @@ class MyDocument extends Document {
           />
           <meta property="twitter:url" content="https://developic.shop" />
           <meta name="theme-color" content="#273bb9" />
-
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Source+Code+Pro:wght@300&display=swap"
             rel="stylesheet"
           ></link>
-
-          <link rel="icon" href="/favicon.png" />
+          <link
+            href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
+            rel="stylesheet"
+          ></link>
+          <link rel="icon" href="/favicon.ico" />
+          <title>Conrad.ev</title>
         </Head>
         <body>
           <Main />

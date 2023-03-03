@@ -1,65 +1,6 @@
 import styled from '@emotion/styled';
 
-export const MainPage = styled.main`
-  .bottom_section {
-    display: flex;
-    position: relative;
-    gap: 68px;
-    .left {
-      flex: 2.2;
-      .post_summary {
-        margin-bottom: 40px;
-      }
-    }
-    .right {
-      align-self: flex-start;
-      position: sticky;
-      top: 80px;
-      flex: 1;
-      .about_me {
-        margin-bottom: 64px;
-      }
-      .topics {
-        margin-bottom: 52px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px 20px;
-      }
-      .post_summary {
-        margin-bottom: 52px;
-      }
-      .feature_post {
-        margin-bottom: 80px;
-      }
-    }
-  }
-`;
-
-export const AboutPage = styled.main`
-  min-height: 100vh;
-  padding: 60px 0;
-  h1:nth-of-type(1) {
-    margin-bottom: 220px;
-    font-size: 40px;
-  }
-  h1 {
-    font-size: 48px;
-    font-weight: bold;
-    line-height: 1.4;
-    vertical-align: baseline;
-    small {
-      margin-left: 12px;
-      font-size: 16px;
-      vertical-align: text-bottom;
-    }
-  }
-  h1:nth-of-type(3) {
-    text-align: center;
-    font-size: 64px;
-    margin-top: 220px;
-    text-shadow: 0 8px 10px #eeeeef;
-  }
-`;
+export const MainPage = styled.main``;
 
 export const SeriesPage = styled.main`
   min-height: 100vh;
@@ -150,6 +91,74 @@ export const SeriesDetailPage = styled.main`
     }
     li + li {
       margin-top: 72px;
+    }
+  }
+`;
+
+export const InsightPage = styled.main`
+  height: 300vh;
+  .head {
+    h1 {
+      font-size: 52px;
+      font-weight: 800;
+      svg {
+        margin-left: 12px;
+        transform: translate(0px, 2px);
+      }
+    }
+    p {
+      margin-top: 12px;
+      font-size: 20px;
+      line-height: 1.4;
+      font-weight: 600;
+      color: #555;
+    }
+  }
+  .content {
+    display: flex;
+    margin-top: 80px;
+    ul {
+      flex: 1;
+    }
+  }
+`;
+
+export const DevPage = styled(InsightPage)`
+  .content {
+    display: flex;
+    margin-top: 80px;
+    gap: 76px;
+    & > ul {
+      flex: 1;
+    }
+    aside {
+      width: 260px;
+      .inner {
+        position: sticky;
+        top: 80px;
+        padding: 40px 12px;
+        & > p {
+          margin-bottom: 24px;
+          font-size: 28px;
+          font-weight: bold;
+        }
+        ul {
+          li {
+            padding: 12px 0;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            &:hover {
+              p {
+                opacity: 0.6;
+                font-weight: 600;
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;

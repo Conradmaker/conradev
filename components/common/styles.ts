@@ -5,10 +5,15 @@ export const HeaderBox = styled.header`
   align-items: center;
   justify-content: space-between;
   height: 80px;
+  margin-top: 40px;
   .logo {
     font-size: 28px;
     font-weight: bold;
     /* font-family: 'Baloo2'; */
+    svg {
+      width: 132px;
+      height: 40px;
+    }
   }
   & > ul {
     display: flex;
@@ -28,57 +33,54 @@ export const HeaderBox = styled.header`
 export const NavigationBox = styled.nav`
   position: sticky;
   top: 0;
+  left: 0;
   background-color: #ffffff;
-  border-top: 1px solid #ededed;
-  border-bottom: 1px solid #ededed;
-  font-weight: 400;
-  font-size: 12px;
-  height: 56px;
+  /* border-bottom: 1px solid #ededed; */
   z-index: 99;
+  width: 100%;
   .inner {
-    height: 100%;
+    height: 56px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    a {
-      padding: 4px 4px 4px 4px;
-      letter-spacing: 1px;
-    }
-    a.active {
-      /* color: #fff;
+    nav {
+      flex: 1;
+      font-weight: 500;
+      font-size: 14px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      a {
+        padding: 4px 4px 4px 4px;
+        letter-spacing: 1px;
+      }
+      a.active {
+        /* color: #fff;
       background: ${({ theme }) => theme.primary[1]}; */
-      color: ${({ theme }) => theme.primary[1]};
-      font-weight: bold;
+        color: ${({ theme }) => theme.primary[1]};
+        font-weight: bold;
+      }
+      a + a {
+        margin-left: 28px;
+      }
     }
-    a + a {
-      margin-left: 28px;
+  }
+  .search {
+    font-size: 20px;
+    cursor: pointer;
+    &:hover {
+      color: ${({ theme }) => theme.primary[1]};
     }
   }
 `;
-
-export const DividerBox = styled.div`
-  width: 100%;
+export const FooterCT = styled.footer`
+  font-size: 16px;
+  font-weight: 500;
+  padding-bottom: 80px;
+  margin-top: 120px;
   display: flex;
   align-items: center;
-  margin-bottom: 18px;
-  margin-top: 24px;
-  span {
-    font-size: 12px;
-    font-weight: 500;
-    margin-right: 20px;
-  }
-  .line {
-    flex: 1;
-    height: 1px;
-    background-color: #ededed;
-  }
-`;
-
-export const FooterCT = styled.footer`
-  font-size: 14px;
-  color: #888;
-  font-weight: 300;
-  padding-bottom: 80px;
-  margin-top: 52px;
+  justify-content: space-between;
   ul {
     display: flex;
     li {
@@ -90,12 +92,4 @@ export const FooterCT = styled.footer`
       justify-content: center;
     }
   }
-`;
-
-export const PillBox = styled.div`
-  padding: 2px 4px;
-  color: ${({ theme }) => theme.primary[1]};
-  display: flex;
-  align-items: center;
-  font-size: 14px;
 `;
