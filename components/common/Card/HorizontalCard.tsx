@@ -4,7 +4,7 @@ import { HorizontalCardBox } from './styles';
 export default function HorizontalCard() {
   return (
     <HorizontalCardBox>
-      <img className="card_bg" src="https://picsum.photos/1200" />
+      <img alt="" className="card_bg" src="https://picsum.photos/1200" />
       <div className="content">
         <p className="date">2020.03.22</p>
         <h3>

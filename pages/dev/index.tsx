@@ -1,6 +1,6 @@
 import Layout from 'components/common/Layout';
 import PostItem from 'components/common/List/Post';
-import { DevPage } from 'pages/styles';
+import { DevPage } from 'styles/mainStyles';
 import React from 'react';
 import { FcCommandLine } from 'react-icons/fc';
 

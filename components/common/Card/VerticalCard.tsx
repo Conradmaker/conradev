@@ -5,7 +5,11 @@ export default function VerticalCard() {
   return (
     <VerticalCardBox>
       {/* <img className="card_bg" src="https://picsum.photos/1200" /> */}
-      <img className="card_bg" src="https://cdn.wallpapersafari.com/20/1/lKyZvD.jpg" />
+      <img
+        alt=""
+        className="card_bg"
+        src="https://cdn.wallpapersafari.com/20/1/lKyZvD.jpg"
+      />
       <div className="content">
         <span className="tag">테크</span>
         <h3>

@@ -1,6 +1,6 @@
 import Layout from 'components/common/Layout';
 import ListItem from 'components/common/List/List';
-import { InsightPage } from 'pages/styles';
+import { InsightPage } from 'styles/mainStyles';
 import React from 'react';
 import { FcIdea } from 'react-icons/fc';
 

@@ -1,34 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
-import ReactMarkdown from 'react-markdown';
-import gfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
-import rehypeSlug from 'rehype-slug';
 import Layout from 'components/common/Layout';
 import React, { useEffect, useState } from 'react';
-import { HiOutlineCalendar, HiOutlineClock, HiOutlineLink } from 'react-icons/hi';
-import { SpecialComponents } from 'react-markdown/lib/ast-to-react';
-import { NormalComponents } from 'react-markdown/lib/complex-types';
-import { InsightPostPage } from '../post/styles';
-const CodeBlock: Partial<
-  Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents
-> = {
-  a: props => {
-    console.log(props);
-    return (
-      <a href={props.href} target="_blank" rel="noreferrer">
-        <HiOutlineLink size={16} />
-        {props.children[0]}
-      </a>
-    );
-  },
-  img: props => {
-    console.log(props.src);
-    return <img src={`${process.env.NEXT_PUBLIC_SERVER_HOST}${props.src}`} alt="" />;
-  },
-};
+import { HiOutlineCalendar, HiOutlineClock } from 'react-icons/hi';
+import { InsightPostPage } from '../../styles/postStyles';
+import MdView from 'components/Post/MdView';
 
 export default function Post() {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState<any>('');
   useEffect(() => {
     axios
       .get(`${process.env.NEXT_PUBLIC_SERVER_HOST}/api/posts/3?populate=*`)
@@ -59,15 +38,10 @@ export default function Post() {
         </div>
         <div className="viewer">
           <aside />
-          <ReactMarkdown
-            className="markdown-body"
-            rehypePlugins={[rehypeRaw, rehypeSlug]}
-            remarkPlugins={[gfm]}
-            // disallowedElements={['aside']}
-            components={CodeBlock}
-          >
-            {content?.data?.attributes.blocks[0].body}
-          </ReactMarkdown>
+          <MdView
+            type="insight"
+            content={content?.data?.attributes.blocks[0].body || ''}
+          />
         </div>
       </InsightPostPage>
     </Layout>

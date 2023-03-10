@@ -9,6 +9,7 @@ function DevPostSubmit() {
   return (
     <HorizontalCardBox type="submit">
       <img
+        alt=""
         className="card_bg"
         src="https://genki.fueko.net/content/images/size/w800/2021/06/mymind-tZCrFpSNiIQ-unsplash.jpg"
       />
@@ -28,6 +29,7 @@ function DevPostSeries() {
   return (
     <HorizontalCardBox type="submit">
       <img
+        alt=""
         className="card_bg"
         src="https://genki.fueko.net/content/images/size/w800/2021/05/photo-1604079628040-94301bb21b91.jpeg"
       />

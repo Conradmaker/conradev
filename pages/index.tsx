@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { MainPage } from './styles';
+import { MainPage } from '../styles/mainStyles';
 import Layout from '../components/common/Layout';
 import ArticleList from 'components/Main/ArticleList';
 import DevPostList from 'components/Main/DevPostList';

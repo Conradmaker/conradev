@@ -1,53 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import gfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
-import rehypeSlug from 'rehype-slug';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import Layout from '../../components/common/Layout';
-import { PostCT } from '../post/styles';
+import { PostCT } from '../../styles/postStyles';
 import HeadingAnchor from 'components/Post/HeadingAnchor';
-import { NormalComponents } from 'react-markdown/lib/complex-types';
-import { SpecialComponents } from 'react-markdown/lib/ast-to-react';
-import { CodeProps } from 'react-markdown/lib/ast-to-react';
 import useHeadAnchor from 'hooks/useHeadAnchor';
-import { HiOutlineCalendar, HiOutlineClock, HiOutlineLink } from 'react-icons/hi';
-
-const CodeBlock: Partial<
-  Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents
-> = {
-  a: props => {
-    console.log(props);
-    return (
-      <a href={props.href} target="_blank" rel="noreferrer">
-        <HiOutlineLink size={16} />
-        {props.children[0]}
-      </a>
-    );
-  },
-  img: props => {
-    console.log(props.src);
-    return <img src={`${process.env.NEXT_PUBLIC_SERVER_HOST}${props.src}`} alt="" />;
-  },
-  code({ inline, className, children, ...props }: CodeProps) {
-    const match = /language-(\w+)/.exec(className || '');
-    return !inline && match ? (
-      <SyntaxHighlighter style={materialOceanic} language={match[1]} {...props}>
-        {String(children).replace(/\n$/, '')}
-      </SyntaxHighlighter>
-    ) : (
-      <code className={className} {...props}>
-        {children}
-      </code>
-    );
-  },
-};
+import { HiOutlineCalendar, HiOutlineClock } from 'react-icons/hi';
+import MdView from 'components/Post/MdView';
 
 export default function Post() {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState<any>('');
   const { idList } = useHeadAnchor([content]);
   useEffect(() => {
     axios
@@ -63,8 +26,8 @@ export default function Post() {
           <h1 className="title">{content?.data?.attributes.title}</h1>
           <div className="info">
             <ul className="category_list">
-              {content?.data?.attributes?.categories?.data.map(v => (
-                <li>{v.attributes.name}</li>
+              {content?.data?.attributes?.categories?.data.map((v: any, idx: any) => (
+                <li key={idx}>{v.attributes.name}</li>
               ))}
             </ul>
             <ul className="detail">
@@ -89,15 +52,7 @@ export default function Post() {
         </div>
         <div className="viewer">
           <aside />
-          <ReactMarkdown
-            className="markdown-body"
-            rehypePlugins={[rehypeRaw, rehypeSlug]}
-            remarkPlugins={[gfm]}
-            // disallowedElements={['aside']}
-            components={CodeBlock}
-          >
-            {content?.data?.attributes.blocks[0].body}
-          </ReactMarkdown>
+          <MdView type="dev" content={content?.data?.attributes.blocks[0].body || ''} />
           <aside>
             <ul>
               {idList.map(v => (
