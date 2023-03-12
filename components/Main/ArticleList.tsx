@@ -2,8 +2,10 @@ import VerticalCard from 'components/common/Card/VerticalCard';
 import React from 'react';
 import { ArticleListCT } from './styles';
 import { FcIdea } from 'react-icons/fc';
+import { postQ } from 'modules/query/post';
 
 export default function ArticleList() {
+  const { data: insights } = postQ.getPostList({ type: 'insight', limit: 4, page: 1 });
   return (
     <ArticleListCT>
       <h2>
@@ -14,18 +16,11 @@ export default function ArticleList() {
         </strong>
       </h2>
       <ul>
-        <li>
-          <VerticalCard />
-        </li>
-        <li>
-          <VerticalCard />
-        </li>
-        <li>
-          <VerticalCard />
-        </li>
-        <li>
-          <VerticalCard />
-        </li>
+        {insights?.map(insight => (
+          <li key={insight.id}>
+            <VerticalCard data={insight} />
+          </li>
+        ))}
       </ul>
     </ArticleListCT>
   );

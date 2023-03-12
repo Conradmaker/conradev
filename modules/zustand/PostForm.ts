@@ -10,7 +10,7 @@ interface FormState {
   content: string;
   cover_horizontal: string;
   cover_vertical: string | null;
-  keywords: string[];
+  keywords: string;
   published_at: Date;
   read_time: number;
   updateState: (value: Partial<FormState>) => void;
@@ -24,7 +24,7 @@ const initialState: Omit<FormState, 'updateState'> = {
   content: '',
   cover_horizontal: '',
   cover_vertical: null,
-  keywords: [],
+  keywords: '',
   published_at: new Date(),
   read_time: 0,
 };

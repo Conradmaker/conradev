@@ -1,6 +1,7 @@
 import { Button, DatePicker, Form, Input, InputNumber, Radio, Select } from 'antd';
 import dayjs from 'dayjs';
 import { supaStorage } from 'libs/storage';
+import { categoryQ } from 'modules/query/category';
 import { usePostFormStore } from 'modules/zustand/PostForm';
 import React, { useRef, useState } from 'react';
 import { HiOutlineCalendar, HiOutlineClock } from 'react-icons/hi';
@@ -20,6 +21,7 @@ export default function InsightForm() {
   const vCover = useRef<HTMLInputElement>(null);
   const hCover = useRef<HTMLInputElement>(null);
   const [categoryOpen, setCategoryOpen] = useState(false);
+  const { data: categoryList } = categoryQ.getCategoryList();
 
   return (
     <>
@@ -128,14 +130,20 @@ export default function InsightForm() {
               placeholder="카테고리 선택"
               defaultValue={categories}
               onChange={v => updateState({ categories: v })}
-              options={[
-                { value: 1, label: 'a' },
-                { value: 2, label: 'b' },
-              ]}
+              options={categoryList?.map(v => ({ value: v.id, label: v.name }))}
             />
             <Button style={{ width: '20%' }} onClick={() => setCategoryOpen(true)}>
               추가
             </Button>
+          </Form.Item>
+          <Form.Item label="키워드">
+            <Select
+              mode="tags"
+              style={{ width: '100%' }}
+              placeholder="Tags Mode"
+              onChange={v => updateState({ keywords: v.join('|') })}
+              options={[]}
+            />
           </Form.Item>
         </Form>
       </div>

@@ -3,8 +3,11 @@ import ListItem from 'components/common/List/List';
 import { InsightPage } from 'styles/mainStyles';
 import React from 'react';
 import { FcIdea } from 'react-icons/fc';
+import { postQ } from 'modules/query/post';
 
 export default function Insight() {
+  const { data } = postQ.getPostList({ type: 'insight' });
+  console.log(data);
   return (
     <Layout>
       <InsightPage className="inner">
@@ -19,18 +22,11 @@ export default function Insight() {
         </div>
         <div className="content">
           <ul>
-            <li>
-              <ListItem />
-            </li>
-            <li>
-              <ListItem />
-            </li>
-            <li>
-              <ListItem />
-            </li>
-            <li>
-              <ListItem />
-            </li>
+            {data?.map((insight, idx) => (
+              <li key={insight.id + ',' + idx}>
+                <ListItem data={insight} />
+              </li>
+            ))}
           </ul>
         </div>
       </InsightPage>

@@ -7,13 +7,16 @@ import { MdEditorCT } from './styles';
 import { InsightPostPage, PostCT } from 'styles/postStyles';
 import { supaStorage } from 'libs/storage';
 import PostInfoForm from './PostInfoForm';
-import { FloatButton } from 'antd';
+import { FloatButton, notification } from 'antd';
 import { HiUpload } from 'react-icons/hi';
 import { usePostFormStore } from 'modules/zustand/PostForm';
+import { postQ } from 'modules/query/post';
 
 export default function MdEditer() {
   const input = useRef<HTMLInputElement>(null);
-  const { type, content, updateState } = usePostFormStore();
+  const { mutateAsync } = postQ.addPost();
+  const postForm = usePostFormStore();
+  const { type, content, updateState } = postForm;
 
   const img: commands.ICommand<string> = {
     name: 'image',
@@ -31,6 +34,30 @@ export default function MdEditer() {
     if (e.target.files) {
       const data = await supaStorage.savePostImage(e.target.files[0]);
       updateState({ content: content.replace('이미지 업로드중...', data) });
+    }
+  };
+  const onSubmit = async () => {
+    const res = await mutateAsync({
+      categories: postForm.categories,
+      post: {
+        slug: postForm.slug,
+        content: content,
+        cover_horizontal: postForm.cover_horizontal,
+        cover_vertical: type === 'dev' ? null : postForm.cover_vertical,
+        description: postForm.description,
+        published_at: postForm.published_at.toUTCString(),
+        read_time: postForm.read_time,
+        title: postForm.title,
+        type: postForm.type === 'dev' ? 2 : 1,
+        keywords: postForm.keywords,
+      },
+    });
+    if (res) {
+      notification.open({
+        type: 'success',
+        message: '작성 완료',
+        description: '작성이 완료되었습니다..',
+      });
     }
   };
 
@@ -88,6 +115,7 @@ export default function MdEditer() {
         shape="circle"
         type="primary"
         icon={<HiUpload />}
+        onClick={onSubmit}
       />
     </MdEditorCT>
   );

@@ -15,7 +15,6 @@ export const CodeBlock: Partial<
   Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents
 > = {
   a: props => {
-    console.log(props);
     return (
       <a
         href={props.href}
@@ -29,7 +28,6 @@ export const CodeBlock: Partial<
     );
   },
   img: props => {
-    console.log(props.alt);
     return (
       <img draggable={false} src={`${props.src}`} alt={props.alt} title={props.alt} />
     );

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { DependencyList, useEffect, useState } from 'react';
+import { DependencyList, useEffect, useState } from 'react';
 
 export default function useHeadAnchor(deps: DependencyList = []) {
   const [idList, setIdList] = useState<

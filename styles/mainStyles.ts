@@ -8,7 +8,6 @@ export const MainPage = styled.main`
 `;
 
 export const InsightPage = styled.main`
-  height: 300vh;
   .head {
     h1 {
       font-size: 52px;

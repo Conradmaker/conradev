@@ -1,5 +1,6 @@
 import HorizontalCard from 'components/common/Card/HorizontalCard';
 import { HorizontalCardBox } from 'components/common/Card/styles';
+import { postQ } from 'modules/query/post';
 import React from 'react';
 import { FcCommandLine, FcReading, FcTemplate } from 'react-icons/fc';
 import { RiArrowRightSLine } from 'react-icons/ri';
@@ -48,6 +49,7 @@ function DevPostSeries() {
 }
 
 export default function DevPostList() {
+  const { data: devPosts } = postQ.getPostList({ type: 'insight', limit: 4, page: 1 });
   return (
     <DevPostCT>
       <h2>
@@ -61,29 +63,13 @@ export default function DevPostList() {
         <li>
           <DevPostSubmit />
         </li>
-        <li>
-          <HorizontalCard />
-        </li>
-        <li>
-          <HorizontalCard />
-        </li>
-        <li>
-          <HorizontalCard />
-        </li>
-        <li>
-          <HorizontalCard />
-        </li>
-        <li>
-          <HorizontalCard />
-        </li>
+        {devPosts?.map(devPost => (
+          <li key={devPost.id}>
+            <HorizontalCard data={devPost} />
+          </li>
+        ))}
         <li>
           <DevPostSeries />
-        </li>
-        <li>
-          <HorizontalCard />
-        </li>
-        <li>
-          <HorizontalCard />
         </li>
       </ul>
     </DevPostCT>

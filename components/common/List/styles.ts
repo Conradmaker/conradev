@@ -2,9 +2,11 @@ import styled from '@emotion/styled';
 import { breakPoint } from 'styles/theme';
 
 export const SimpleListItem = styled.div`
-  display: flex;
-  gap: 50px;
-  align-items: center;
+  & > a {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+  }
   margin-bottom: 44px;
   cursor: pointer;
   &:hover {
