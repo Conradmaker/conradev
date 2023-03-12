@@ -9,9 +9,7 @@ const saveCoverImage = async (file: File) => {
     .from('cover')
     .upload(getFileName(file.name), file);
   if (error) throw new Error('이미지 업로드 실패');
-  return (
-    'https://istuyhpbautvjypbjrpy.supabase.co/storage/v1/object/public/cover/' + data.path
-  );
+  return `https://${process.env.NEXT_PUBLIC_SPB_APP_ID}.supabase.co/storage/v1/object/public/cover/${data.path}`;
 };
 
 const savePostImage = async (file: File) => {
@@ -19,10 +17,7 @@ const savePostImage = async (file: File) => {
     .from('post-image')
     .upload(getFileName(file.name), file);
   if (error) throw new Error('이미지 업로드 실패');
-  return (
-    'https://istuyhpbautvjypbjrpy.supabase.co/storage/v1/object/public/post-image/' +
-    data.path
-  );
+  return `https://${process.env.NEXT_PUBLIC_SPB_APP_ID}.supabase.co/storage/v1/object/public/post-image/${data.path}`;
 };
 
 export const supaStorage = {
