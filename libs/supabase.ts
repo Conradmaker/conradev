@@ -9,18 +9,21 @@ export interface Database {
           id: number;
           name: string;
           slug: string | null;
+          type: number | null;
         };
         Insert: {
           created_at?: string | null;
           id?: number;
           name: string;
           slug?: string | null;
+          type?: number | null;
         };
         Update: {
           created_at?: string | null;
           id?: number;
           name?: string;
           slug?: string | null;
+          type?: number | null;
         };
       };
       post_categories: {

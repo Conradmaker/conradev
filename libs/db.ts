@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CategoryFilter } from 'modules/query/category';
 import { PostFilter } from 'modules/query/post';
 import { Category, Post } from 'modules/query/types';
 import { supabase } from './supabaseClient';
@@ -9,10 +10,11 @@ const isCount = (
   return (v as Array<any>).length > 0;
 };
 
-export const getCategories = async (): Promise<Category[]> => {
+export const getCategories = async (filter?: CategoryFilter): Promise<Category[]> => {
   const result = await supabase
     .from('categories')
-    .select('id,name,slug,post_categories(count)');
+    .select('id,name,slug,post_categories(count)')
+    .neq('type', filter?.type ? (filter.type === 'insight' ? 2 : 1) : 0);
   return (
     result.data?.map(v => ({
       ...v,
@@ -21,7 +23,11 @@ export const getCategories = async (): Promise<Category[]> => {
   );
 };
 
-export const addCategory = async (payload: { name: string; slug: string }) => {
+export const addCategory = async (payload: {
+  name: string;
+  slug: string;
+  type: number;
+}) => {
   const exist = await supabase
     .from('categories')
     .select('id,name,slug')

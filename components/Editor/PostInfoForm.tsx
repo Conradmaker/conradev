@@ -21,7 +21,7 @@ export default function InsightForm() {
   const vCover = useRef<HTMLInputElement>(null);
   const hCover = useRef<HTMLInputElement>(null);
   const [categoryOpen, setCategoryOpen] = useState(false);
-  const { data: categoryList } = categoryQ.getCategoryList();
+  const { data: categoryList } = categoryQ.getCategoryList({ type });
 
   return (
     <>
@@ -130,7 +130,10 @@ export default function InsightForm() {
               placeholder="카테고리 선택"
               defaultValue={categories}
               onChange={v => updateState({ categories: v })}
-              options={categoryList?.map(v => ({ value: v.id, label: v.name }))}
+              options={categoryList?.map(v => ({
+                value: v.id,
+                label: v.name + `(${v.count || 0})`,
+              }))}
             />
             <Button style={{ width: '20%' }} onClick={() => setCategoryOpen(true)}>
               추가

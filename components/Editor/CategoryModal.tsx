@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Input, Modal } from 'antd';
 import { categoryQ } from 'modules/query/category';
+import { usePostFormStore } from 'modules/zustand/PostForm';
 
 type CategoryModalProps = {
   open: boolean;
@@ -9,9 +10,10 @@ type CategoryModalProps = {
 export default function CategoryModal({ open, onClose }: CategoryModalProps) {
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
+  const { type } = usePostFormStore();
   const { mutate } = categoryQ.addCategory();
   const onSubmit = async () => {
-    mutate({ name, slug });
+    mutate({ name, slug, type: type === 'insight' ? 1 : 2 });
     onClose();
   };
 

@@ -8,7 +8,7 @@ import { categoryQ } from 'modules/query/category';
 
 export default function index() {
   const { data: posts } = postQ.getPostList({ type: 'dev' });
-  const { data: categories } = categoryQ.getCategoryList();
+  const { data: categories } = categoryQ.getCategoryList({ type: 'dev' });
   return (
     <Layout>
       <DevPage className="inner">

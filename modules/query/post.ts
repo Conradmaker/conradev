@@ -5,7 +5,7 @@ import getQueryClient from './queryClient';
 import { Filter, Post } from './types';
 
 export type PostFilter = {
-  type?: 'insight' | 'dev';
+  type?: 'insight' | 'dev' | 'all';
 } & Filter;
 export const postKeys = {
   all: ['post'] as const,
@@ -24,7 +24,7 @@ export const postQ = {
     >
   ) =>
     useQuery(
-      postKeys.listFilter(),
+      postKeys.listFilter(filter),
       async () => {
         try {
           const result = await db.post.getList(filter);
