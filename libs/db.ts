@@ -51,12 +51,12 @@ export const getPostFetcher = (filter?: PostFilter) => async (): Promise<Post[]>
     const offset = filter?.page ? (filter.page - 1) * limit : 0;
     const result = await supabase
       .from('posts')
-      .select('*')
+      .select('*,categories(id,name,slug)')
       .neq('type', filter?.type ? (filter.type === 'insight' ? 2 : 1) : 0)
       .limit(limit)
       .range(offset, offset + limit)
       .order('published_at', { ascending: false });
-    return result.data || [];
+    return (result.data as Post[]) || [];
   } catch (e) {
     console.error(e);
     throw new Error('');
@@ -93,14 +93,21 @@ export const addPost = async ({
   return true;
 };
 
-export const getSearchResult =
-  (filter?: SearchFilter) =>
+export const getKeywordSearchResult =
+  (filter?: SearchFilter['keyword']) =>
   async (): Promise<{
     insight: Array<Pick<Post, 'id' | 'title' | 'slug'>>;
     dev: Array<Pick<Post, 'id' | 'title' | 'slug'>>;
     category: Array<Pick<Category, 'id' | 'slug'> & { title: string }>;
   }> => {
     try {
+      if (!filter?.keyword.trim()) {
+        return {
+          category: [],
+          insight: [],
+          dev: [],
+        };
+      }
       const postResult = await supabase
         .from('posts')
         .select('slug,title,id,content,type')
@@ -125,6 +132,35 @@ export const getSearchResult =
       throw new Error('');
     }
   };
+
+export const getCategorySearchResult =
+  (filter?: SearchFilter['category']) =>
+  async (): Promise<{
+    post: Array<Post & { categories: Category[] }>;
+    category: Category;
+  }> => {
+    try {
+      const categoryResult = await supabase
+        .from('categories')
+        .select('id,name,slug')
+        .filter('slug', 'eq', filter?.slug || '')
+        .single();
+      const postResult = await supabase
+        .from('posts')
+        .select('*,categories(id,name,slug)')
+        .filter('categories.slug', 'eq', filter?.slug || '')
+        .order('published_at', { ascending: false });
+
+      return {
+        category: categoryResult.data as Category,
+        post: (postResult.data as Array<Post & { categories: Category[] }>) || [],
+      };
+    } catch (e) {
+      console.error(e);
+      throw new Error('');
+    }
+  };
+
 export const db = {
   category: {
     getList: getCategoryListFetcher,
@@ -136,6 +172,7 @@ export const db = {
     add: addPost,
   },
   search: {
-    total: getSearchResult,
+    keyword: getKeywordSearchResult,
+    category: getCategorySearchResult,
   },
 };

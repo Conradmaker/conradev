@@ -4,17 +4,18 @@ import { db } from 'libs/db';
 import { Category, Post } from './types';
 
 export type SearchFilter = {
-  keyword: string;
+  keyword: { keyword: string };
+  category: { slug: string };
 };
 export const searchKeys = {
   all: ['search'] as const,
   list: () => [...searchKeys.all, 'list'] as const,
-  listFilter: (filters?: SearchFilter) =>
+  listFilter: (filters?: SearchFilter['category'] | SearchFilter['keyword']) =>
     [...searchKeys.list(), filters || null] as const,
 };
 export const searchQ = {
-  getPostList: (
-    filter?: SearchFilter,
+  getKeywordSearch: (
+    filter?: SearchFilter['keyword'],
     opt?: UseQueryOptions<
       Promise<{
         insight: Array<Pick<Post, 'id' | 'title' | 'slug'>>;
@@ -29,5 +30,21 @@ export const searchQ = {
       },
       ReturnType<(typeof searchKeys)['listFilter']>
     >
-  ) => useQuery(searchKeys.listFilter(filter), db.search.total(filter), opt),
+  ) => useQuery(searchKeys.listFilter(filter), db.search.keyword(filter), opt),
+
+  getCategorySearch: (
+    filter: SearchFilter['category'],
+    opt?: UseQueryOptions<
+      Promise<{
+        post: Array<Post & { categories: Category[] }>;
+        category: Category;
+      }>,
+      Error,
+      {
+        post: Array<Post & { categories: Category[] }>;
+        category: Category;
+      },
+      ReturnType<(typeof searchKeys)['listFilter']>
+    >
+  ) => useQuery(searchKeys.listFilter(filter), db.search.category(filter), opt),
 };

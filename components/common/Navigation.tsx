@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
+import CategoryList from './CategoryList';
 import OmniBar from './OmniBar';
 import { NavigationBox } from './styles';
 
@@ -30,15 +31,21 @@ export default function Navigation() {
           >
             개발글
           </Link>
+          <div className="keyword">
+            키워드
+            <CategoryList />
+          </div>
         </nav>
         <div className="search">
-          <OmniBar
-            onClose={() => {
-              document.documentElement.style.overflowY = 'auto';
-              setSearchOpen(false);
-            }}
-            open={searchOpen}
-          />
+          {searchOpen && (
+            <OmniBar
+              onClose={() => {
+                document.documentElement.style.overflowY = 'auto';
+                setSearchOpen(false);
+              }}
+              open={searchOpen}
+            />
+          )}
           <IoSearch
             onClick={() => {
               document.documentElement.style.overflowY = 'hidden';

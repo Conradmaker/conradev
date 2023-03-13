@@ -8,7 +8,6 @@ import MetaHead from 'components/common/MetaHead';
 
 export default function Insight() {
   const { data } = postQ.getPostList({ type: 'insight' });
-  console.log(data);
   return (
     <>
       <MetaHead.Default

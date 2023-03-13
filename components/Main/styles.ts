@@ -53,12 +53,12 @@ export const DevPostCT = styled(MainPostListCT)`
     display: grid;
     gap: 28px;
     grid-template-columns: repeat(3, 1fr);
-    & > li:first-of-type {
+    /* & > li:first-of-type {
       grid-column: span 2;
-    }
-    & > li:nth-of-type(7) {
+    } */
+    /* & > li:nth-of-type(7) {
       grid-column: span 2;
-    }
+    } */
   }
   @media ${breakPoint.mobile} {
     margin: 80px 0 32px 0;

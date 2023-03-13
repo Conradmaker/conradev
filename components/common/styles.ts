@@ -43,7 +43,6 @@ export const NavigationBox = styled.nav`
   top: 0;
   left: 0;
   background-color: #ffffff;
-  /* border-bottom: 1px solid #ededed; */
   z-index: 99;
   width: 100%;
   .inner {
@@ -53,20 +52,40 @@ export const NavigationBox = styled.nav`
     align-items: center;
     nav {
       flex: 1;
-      font-weight: 500;
+      font-weight: 400;
       font-size: 15px;
       height: 100%;
       display: flex;
       align-items: center;
-      a {
+      .keyword {
+        cursor: pointer;
+        .category_list {
+          height: 0;
+          overflow: hidden;
+          opacity: 0;
+          transition: all 0.25s;
+        }
+        &:hover {
+          font-weight: 500;
+          .category_list {
+            height: 68px;
+            overflow: visible;
+            opacity: 1;
+          }
+        }
+      }
+      a,
+      .keyword {
         padding: 4px 4px 4px 4px;
         letter-spacing: 1px;
       }
-      a.active {
+      a.active,
+      .keyword.active {
         color: ${({ theme }) => theme.primary[1]};
-        font-weight: 600;
+        font-weight: 500;
       }
-      a + a {
+      a + a,
+      .keyword {
         margin-left: 28px;
       }
     }
@@ -134,4 +153,54 @@ export const OmniBarCT = styled.div`
   display: flex;
   padding-top: 240px;
   justify-content: center;
+`;
+
+export const CategoryListCT = styled.div`
+  position: absolute;
+  width: 100%;
+  left: 0;
+  border-bottom: 1px solid #eee;
+  background-color: #fff;
+  ul.inner {
+    padding-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 0px;
+    align-items: center;
+    justify-content: flex-start;
+    height: 56px;
+  }
+  li {
+    &::after {
+      content: '/';
+      padding: 0 18px;
+      font-size: 4px;
+      color: #888;
+    }
+    &:last-of-type {
+      &::after {
+        content: '';
+        padding: 0px;
+      }
+    }
+    &:hover {
+      opacity: 0.6;
+    }
+    display: flex;
+    align-items: center;
+    a {
+      padding: 12px 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #223;
+    }
+    strong {
+      font-size: 14px;
+      font-weight: 400;
+    }
+    small {
+      font-size: 12px;
+    }
+  }
 `;

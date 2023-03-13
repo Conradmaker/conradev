@@ -6,6 +6,7 @@ import { FcCommandLine } from 'react-icons/fc';
 import { postQ } from 'modules/query/post';
 import { categoryQ } from 'modules/query/category';
 import MetaHead from 'components/common/MetaHead';
+import Link from 'next/link';
 
 export default function index() {
   const { data: posts } = postQ.getPostList({ type: 'dev' });
@@ -43,8 +44,10 @@ export default function index() {
                   {categories?.map(category =>
                     category.count ? (
                       <li key={category.id}>
-                        <p>{category.name}</p>
-                        <span>{category.count}</span>
+                        <Link href={`/category/${category.slug}`}>
+                          <p>{category.name}</p>
+                          <span>{category.count}</span>
+                        </Link>
                       </li>
                     ) : null
                   )}

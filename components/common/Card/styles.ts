@@ -113,8 +113,7 @@ export const HorizontalCardBox = styled(VerticalCardBox)<{
         background: none;
         padding: 32px;
         h3 {
-          font-size: 28px;
-          /* font-weight: 500; */
+          font-size: 32px;
           svg {
             position: absolute;
             font-size: 40px;

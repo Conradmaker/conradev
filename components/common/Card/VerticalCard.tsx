@@ -18,9 +18,12 @@ export default function VerticalCard({ data }: VerticalCardProps) {
           src={data.cover_vertical || data.cover_horizontal || ''}
         />
         <div className="content">
-          <span className="tag">테크</span>
+          <span className="tag">
+            {data.categories?.length ? data.categories[0]?.name : ''}
+          </span>
           <h3>
-            반도체의&nbsp;제왕<div className="br"></div> 인텔은&nbsp;왜&nbsp;몰락하는가
+            {data.title}
+            {/* 반도체의&nbsp;제왕<div className="br"></div> 인텔은&nbsp;왜&nbsp;몰락하는가 */}
           </h3>
           <p className="date">{dayjs(data.published_at).format('YYYY.MM.DD')}</p>
         </div>

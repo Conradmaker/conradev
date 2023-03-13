@@ -39,7 +39,7 @@ export default function OmniBar({ open, onClose }: OmniBarProps) {
   >([]);
   const [keyword, setKeyword] = useState('');
   const [startEl, setStartEl] = useState<EventTarget | null>(null);
-  const { data, isLoading } = searchQ.getPostList({ keyword: keyword });
+  const { data, isLoading } = searchQ.getKeywordSearch({ keyword: keyword });
   useEffect(() => {
     if (!data) return;
     setOptions(

@@ -18,6 +18,22 @@ export const SimpleListItem = styled.div`
   }
   article {
     flex: 1;
+    & > ul {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      li {
+        color: #555;
+        font-weight: 300;
+        flex-wrap: wrap;
+        padding: 4px 0px;
+        margin-bottom: 6px;
+        font-size: 15px;
+        &:hover {
+          color: #000;
+        }
+      }
+    }
     h2 {
       transition: all 0.2s;
       font-size: 42px;

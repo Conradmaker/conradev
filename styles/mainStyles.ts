@@ -70,12 +70,14 @@ export const DevPage = styled(InsightPage)`
         }
         ul {
           li {
-            padding: 12px 0;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
+            a {
+              padding: 12px 0;
+              font-size: 16px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              cursor: pointer;
+            }
             &:hover {
               p {
                 opacity: 0.6;
@@ -108,12 +110,14 @@ export const DevPage = styled(InsightPage)`
             gap: 8px 12px;
             flex-wrap: wrap;
             li {
-              padding: 8px 6px;
-              display: flex;
-              justify-content: center;
-              font-size: 12px;
-              background-color: #fafafa;
-              gap: 4px;
+              a {
+                padding: 8px 6px;
+                display: flex;
+                justify-content: center;
+                font-size: 12px;
+                background-color: #fafafa;
+                gap: 4px;
+              }
               span {
                 font-size: 12px;
                 color: #555;
