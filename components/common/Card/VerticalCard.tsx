@@ -12,7 +12,8 @@ export default function VerticalCard({ data }: VerticalCardProps) {
     <Link href={`/insight/${data.slug}`}>
       <VerticalCardBox>
         <img
-          alt=""
+          alt={data.title || ''}
+          title={data.title || ''}
           className="card_bg"
           src={data.cover_vertical || data.cover_horizontal || ''}
         />

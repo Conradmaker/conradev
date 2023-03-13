@@ -10,7 +10,8 @@ function DevPostSubmit() {
   return (
     <HorizontalCardBox type="submit">
       <img
-        alt=""
+        alt="E-BOOK 보러가기"
+        title="E-BOOK 보러가기"
         className="card_bg"
         src="https://genki.fueko.net/content/images/size/w800/2021/06/mymind-tZCrFpSNiIQ-unsplash.jpg"
       />
@@ -30,7 +31,8 @@ function DevPostSeries() {
   return (
     <HorizontalCardBox type="submit">
       <img
-        alt=""
+        alt="시리즈 보러가기"
+        title="시리즈 보러가기"
         className="card_bg"
         src="https://genki.fueko.net/content/images/size/w800/2021/05/photo-1604079628040-94301bb21b91.jpeg"
       />

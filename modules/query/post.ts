@@ -20,44 +20,19 @@ export const postQ = {
       Promise<Post[]>,
       Error,
       Post[],
-      ReturnType<typeof postKeys['listFilter']>
+      ReturnType<(typeof postKeys)['listFilter']>
     >
-  ) =>
-    useQuery(
-      postKeys.listFilter(filter),
-      async () => {
-        try {
-          const result = await db.post.getList(filter);
-          return result;
-        } catch (e) {
-          console.error(e);
-          throw new Error('');
-        }
-      },
-      opt
-    ),
+  ) => useQuery(postKeys.listFilter(filter), db.post.getList(filter), opt),
+
   getPostDetail: (
     slug: string,
     opt?: UseQueryOptions<
       Promise<Post>,
       Error,
       Post,
-      ReturnType<typeof postKeys['detail']>
+      ReturnType<(typeof postKeys)['detail']>
     >
-  ) =>
-    useQuery(
-      postKeys.detail(slug),
-      async () => {
-        try {
-          const result = await db.post.getDetail(slug);
-          return result;
-        } catch (e) {
-          console.error(e);
-          throw new Error('');
-        }
-      },
-      opt
-    ),
+  ) => useQuery(postKeys.detail(slug), db.post.getDetail(slug), opt),
   addPost: () =>
     useMutation({
       mutationFn: (payload: { post: Post; categories: number[] }) => {

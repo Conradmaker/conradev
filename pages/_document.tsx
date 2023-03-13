@@ -16,29 +16,6 @@ class MyDocument extends Document {
             src="//conradev-me.disqus.com/count.js"
             async
           ></script>
-          <meta name="author" content="cozi" />
-          <meta name="description" content="blog for photographer" />
-          <meta property="og:type" content="website" />
-          <meta property="og:site_name" content="DeveloPic" />
-          <meta property="og:title" content="DeveloPic" />
-          <meta property="og:description" content="사진과 글의 만남 디벨로픽입니다." />
-          <meta
-            property="og:image"
-            content="https://i.ibb.co/G5DwjyP/linkedin-profile-image2-removebg-preview.png"
-          />
-          <meta property="og:url" content="https://developic.shop" />
-          <meta property="twitter:card" content="summary" />
-          <meta property="twitter:site" content="DeveloPic" />
-          <meta property="twitter:title" content="DeveloPic" />
-          <meta
-            property="twitter:description"
-            content="사진과 글의 만남 디벨로픽입니다."
-          />
-          <meta
-            property="twitter:image"
-            content="https://i.ibb.co/G5DwjyP/linkedin-profile-image2-removebg-preview.png"
-          />
-          <meta property="twitter:url" content="https://developic.shop" />
           <meta name="theme-color" content="#273bb9" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
@@ -50,7 +27,6 @@ class MyDocument extends Document {
             rel="stylesheet"
           ></link>
           <link rel="icon" href="/favicon.ico" />
-          <title>Conrad.ev</title>
         </Head>
         <body>
           <Main />

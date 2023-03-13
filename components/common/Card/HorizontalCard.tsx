@@ -13,6 +13,7 @@ export default function HorizontalCard({ data }: HorizontalCardProps) {
       <HorizontalCardBox>
         <img
           alt={data.title || ''}
+          title={data.title || ''}
           className="card_bg"
           src={data.cover_horizontal || ''}
         />

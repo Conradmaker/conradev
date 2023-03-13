@@ -25,7 +25,11 @@ export default function ListItem({ data }: ListItemProps) {
           </p>
         </article>
         <div className="img_wrapper">
-          <img src={data.cover_horizontal || ''} alt={data.title || ''} />
+          <img
+            src={data.cover_horizontal || ''}
+            alt={data.title || ''}
+            title={data.title || ''}
+          />
         </div>
       </Link>
     </SimpleListItem>

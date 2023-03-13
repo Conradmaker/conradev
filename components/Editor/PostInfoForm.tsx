@@ -144,7 +144,7 @@ export default function InsightForm() {
               mode="tags"
               style={{ width: '100%' }}
               placeholder="Tags Mode"
-              onChange={v => updateState({ keywords: v.join('|') })}
+              onChange={v => updateState({ keywords: v.join(',') })}
               options={[]}
             />
           </Form.Item>
@@ -163,7 +163,14 @@ export default function InsightForm() {
             <span>{dayjs(published_at).format('YYYY년 MM월 DD일')}</span>
           </li>
         </ul>
-        {cover_vertical && <img src={cover_vertical} alt="s" className="thumb" />}
+        {cover_vertical && (
+          <img
+            src={cover_vertical}
+            alt={title || ''}
+            title={title || ''}
+            className="thumb"
+          />
+        )}
       </div>
       <CategoryModal open={categoryOpen} onClose={() => setCategoryOpen(false)} />
     </>

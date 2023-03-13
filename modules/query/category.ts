@@ -22,22 +22,9 @@ export const categoryQ = {
       Promise<Category[]>,
       Error,
       Category[],
-      ReturnType<typeof categoryKeys['listFilter']>
+      ReturnType<(typeof categoryKeys)['listFilter']>
     >
-  ) =>
-    useQuery(
-      categoryKeys.listFilter(filter),
-      async () => {
-        try {
-          const result = await db.category.getList(filter);
-          return result;
-        } catch (e) {
-          console.error(e);
-          throw new Error('');
-        }
-      },
-      opt
-    ),
+  ) => useQuery(categoryKeys.listFilter(filter), db.category.getList(filter), opt),
   addCategory: () =>
     useMutation({
       mutationFn: (payload: { name: string; slug: string; type: number }) => {
