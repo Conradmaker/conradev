@@ -93,6 +93,27 @@ export const addPost = async ({
   return true;
 };
 
+export const updatePost = async ({
+  post,
+  categories,
+}: {
+  post: Post;
+  categories: number[];
+}): Promise<boolean> => {
+  const result = await supabase
+    .from('posts')
+    .update(post)
+    .eq('slug', post.slug)
+    .select('id')
+    .single();
+  if (!result.data) return false;
+  await supabase.from('post_categories').delete().eq('post_id', result.data.id);
+  await supabase
+    .from('post_categories')
+    .insert(categories.map(c => ({ post_id: result.data.id, category_id: c })));
+  return true;
+};
+
 export const getKeywordSearchResult =
   (filter?: SearchFilter['keyword']) =>
   async (): Promise<{
@@ -147,10 +168,9 @@ export const getCategorySearchResult =
         .single();
       const postResult = await supabase
         .from('posts')
-        .select('*,categories(id,name,slug)')
+        .select('*,categories!inner(id,name,slug)')
         .filter('categories.slug', 'eq', filter?.slug || '')
         .order('published_at', { ascending: false });
-
       return {
         category: categoryResult.data as Category,
         post: (postResult.data as Array<Post & { categories: Category[] }>) || [],
@@ -170,6 +190,7 @@ export const db = {
     getList: getPostFetcher,
     getDetail: getPostDetailFetcher,
     add: addPost,
+    update: updatePost,
   },
   search: {
     keyword: getKeywordSearchResult,

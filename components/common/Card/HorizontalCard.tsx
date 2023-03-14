@@ -9,20 +9,17 @@ type HorizontalCardProps = {
 };
 export default function HorizontalCard({ data }: HorizontalCardProps) {
   return (
-    <Link href={`/dev/${data.slug}`}>
+    <Link href={`/dev/${data.slug}`} title={data.title || ''}>
       <HorizontalCardBox>
         <img
           alt={data.title || ''}
           title={data.title || ''}
           className="card_bg"
-          src={data.cover_horizontal || ''}
+          src={data.cover_vertical || data.cover_horizontal || ''}
         />
         <div className="content">
           <p className="date">{dayjs(data.published_at).format('YYYY.MM.DD')}</p>
-          <h3>
-            {data.title}
-            {/* 반도체의&nbsp;제왕<div className="br"></div> 인텔은&nbsp;왜&nbsp;몰락하는가 */}
-          </h3>
+          <h3>{data.title}</h3>
           <ul className="tag_list">
             {data.categories?.map(v => (
               <li className="tag" key={v.id}>

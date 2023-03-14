@@ -4,7 +4,7 @@ import MetaHead from 'components/common/MetaHead';
 import { searchQ } from 'modules/query/search';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { FcCommandLine, FcSearch } from 'react-icons/fc';
+import { FcSearch } from 'react-icons/fc';
 import { InsightPage } from 'styles/mainStyles';
 
 export default function Category() {

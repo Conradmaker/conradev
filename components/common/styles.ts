@@ -57,23 +57,6 @@ export const NavigationBox = styled.nav`
       height: 100%;
       display: flex;
       align-items: center;
-      .keyword {
-        cursor: pointer;
-        .category_list {
-          height: 0;
-          overflow: hidden;
-          opacity: 0;
-          transition: all 0.25s;
-        }
-        &:hover {
-          font-weight: 500;
-          .category_list {
-            height: 68px;
-            overflow: visible;
-            opacity: 1;
-          }
-        }
-      }
       a,
       .keyword {
         padding: 4px 4px 4px 4px;
@@ -87,6 +70,25 @@ export const NavigationBox = styled.nav`
       a + a,
       .keyword {
         margin-left: 28px;
+      }
+      .keyword {
+        cursor: pointer;
+        .category_list {
+          height: 0;
+          overflow: hidden;
+          opacity: 0;
+          transition: all 0.25s;
+          border-width: 0px;
+        }
+        &:hover {
+          font-weight: 500;
+          .category_list {
+            height: 68px;
+            overflow: visible;
+            opacity: 1;
+            border-width: 1px;
+          }
+        }
       }
     }
   }
@@ -105,7 +107,8 @@ export const NavigationBox = styled.nav`
       nav {
         /* justify-content: center; */
         font-size: 14px;
-        a + a {
+        a + a,
+        .keyword {
           margin-left: 12px;
         }
       }
@@ -116,17 +119,28 @@ export const NavigationBox = styled.nav`
   }
 `;
 export const FooterCT = styled.footer`
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 400;
   padding-bottom: 80px;
   margin-top: 120px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   ul {
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
     li {
-      display: flex;
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        &:hover {
+          opacity: 0.6;
+        }
+      }
     }
     li:nth-of-type(2) {
       flex: 1;
@@ -201,6 +215,33 @@ export const CategoryListCT = styled.div`
     }
     small {
       font-size: 12px;
+    }
+  }
+  @media ${breakPoint.mobile} {
+    padding: 0 20px;
+    li {
+      &::after {
+        content: '/';
+        padding: 0 12px;
+        font-size: 4px;
+        color: #888;
+      }
+      display: flex;
+      align-items: center;
+      a {
+        padding: 12px 4px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #223;
+      }
+      strong {
+        font-size: 14px;
+        font-weight: 400;
+      }
+      small {
+        font-size: 12px;
+      }
     }
   }
 `;

@@ -44,7 +44,10 @@ export default function index() {
                   {categories?.map(category =>
                     category.count ? (
                       <li key={category.id}>
-                        <Link href={`/category/${category.slug}`}>
+                        <Link
+                          href={`/category/${category.slug}`}
+                          title={category.name || ''}
+                        >
                           <p>{category.name}</p>
                           <span>{category.count}</span>
                         </Link>

@@ -9,10 +9,12 @@ import CategoryModal from './CategoryModal';
 export default function InsightForm() {
   const {
     type,
+    slug,
     title,
     updateState,
     description,
     read_time,
+    keywords,
     published_at,
     cover_horizontal,
     cover_vertical,
@@ -62,7 +64,12 @@ export default function InsightForm() {
           </Form.Item>
 
           <Form.Item label="SLUG">
-            <Input type="text" placeholder="slug" />
+            <Input
+              type="text"
+              placeholder="slug"
+              value={slug}
+              onChange={e => updateState({ slug: e.target.value })}
+            />
           </Form.Item>
           <Form.Item label="출간일 & 시간">
             <Input.Group compact>
@@ -80,28 +87,26 @@ export default function InsightForm() {
               />
             </Input.Group>
           </Form.Item>
-          {type === 'insight' && (
-            <Form.Item label="커버(세로)">
-              <Input.Search
-                placeholder=""
-                value={cover_vertical || ''}
-                enterButton="업로드"
-                onSearch={() => vCover.current?.click()}
-              />
-              <input
-                hidden
-                ref={vCover}
-                type="file"
-                className="detail"
-                onChange={async e => {
-                  if (e.target.files) {
-                    const data = await supaStorage.saveCoverImage(e.target.files[0]);
-                    updateState({ cover_vertical: data });
-                  }
-                }}
-              />
-            </Form.Item>
-          )}
+          <Form.Item label="커버(세로or텍스트X)">
+            <Input.Search
+              placeholder=""
+              value={cover_vertical || ''}
+              enterButton="업로드"
+              onSearch={() => vCover.current?.click()}
+            />
+            <input
+              hidden
+              ref={vCover}
+              type="file"
+              className="detail"
+              onChange={async e => {
+                if (e.target.files) {
+                  const data = await supaStorage.saveCoverImage(e.target.files[0]);
+                  updateState({ cover_vertical: data });
+                }
+              }}
+            />
+          </Form.Item>
           <Form.Item label="커버(가로)">
             <Input.Search
               placeholder=""
@@ -146,6 +151,19 @@ export default function InsightForm() {
               placeholder="Tags Mode"
               onChange={v => updateState({ keywords: v.join(',') })}
               options={[]}
+              value={
+                keywords
+                  ? keywords.split(',')
+                  : [
+                      '개발',
+                      '프로그래밍',
+                      '코딩',
+                      '프론트엔드',
+                      '백엔드',
+                      '스타트업',
+                      '기술블로그',
+                    ]
+              }
             />
           </Form.Item>
         </Form>

@@ -73,7 +73,7 @@ export const PostCT = styled.article`
       top: 150px;
       height: 100%;
       white-space: nowrap;
-      transform: translateX(200px);
+      transform: translateX(100px);
     }
   }
   @media ${breakPoint.mobile} {
@@ -123,6 +123,17 @@ export const PostCT = styled.article`
 export const InsightPostPage = styled(PostCT)`
   max-width: 660px;
   text-align: center;
+  .inner > .category {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    font-size: 17px;
+    color: #555;
+    margin-bottom: 12px;
+    li:hover {
+      opacity: 0.6;
+    }
+  }
   .inner > .title {
     font-size: 40px;
     font-weight: 700;

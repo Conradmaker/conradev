@@ -12,6 +12,7 @@ export const HeadingAnchorBox = styled.a`
   font-weight: 300;
   margin-top: 8px;
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  transition: all 0.2s;
   &.heading_1 {
     font-weight: 700;
     margin-bottom: 2px;
@@ -21,13 +22,13 @@ export const HeadingAnchorBox = styled.a`
   &.heading_2 {
     font-weight: 400;
     text-indent: 12px;
-    margin-top: 4px;
-    color: #666;
+    margin-top: 6px;
+    color: #555;
   }
   &.heading_3 {
     text-indent: 24px;
     font-size: 14px;
-    margin-top: 2px;
+    margin-top: 6px;
     color: #888;
   }
   &.heading_4 {
@@ -59,17 +60,17 @@ export const MdViewCT = styled.div`
     padding-top: 60px;
     margin-bottom: 120px;
     margin: 0 auto;
+
     h1,
     h2,
     h3,
     h4 {
-      margin: 1.5rem 0 0.5rem;
+      margin: 3.5rem 0 0.5rem;
       font-weight: inherit;
       line-height: 1.42;
     }
     h1 {
       font-weight: 500;
-      margin-top: 0;
       font-size: 2.5rem;
     }
     h2 {
@@ -115,7 +116,7 @@ export const MdViewCT = styled.div`
     a {
       color: #5d5ecf;
       font-weight: 400;
-      font-size: 17px;
+      font-size: 16px;
       svg {
         padding-top: 2px;
         margin-right: 2px;
@@ -126,7 +127,7 @@ export const MdViewCT = styled.div`
       }
     }
     strong {
-      font-weight: 400;
+      font-weight: 500;
     }
     & > pre {
       background-color: #fff !important;
@@ -158,6 +159,9 @@ export const MdViewCT = styled.div`
       object-position: center;
       display: block;
     }
+    hr {
+      margin: 5rem 0;
+    }
   }
   .markdown-body.insight {
     * {
@@ -171,9 +175,10 @@ export const MdViewCT = styled.div`
     h2,
     h3,
     h4 {
-      margin: 1.5rem 0 0.5rem;
+      margin: 3.5rem 0 0.5rem;
       font-weight: inherit;
       line-height: 1.42;
+      font-weight: 700;
     }
     h1 {
       font-weight: 500;
@@ -208,15 +213,14 @@ export const MdViewCT = styled.div`
       }
     }
     p {
-      font-size: 16px;
-      font-weight: 300;
+      font-size: 15.5px;
+      font-weight: 200;
       line-height: 1.8;
       color: #111;
     }
     strong {
       font-weight: 900;
       color: #000;
-      /* text-decoration: underline; */
     }
     code {
       font-family: 'JetBrains Mono', monospace !important;
@@ -226,6 +230,9 @@ export const MdViewCT = styled.div`
     }
     img {
       max-height: 360px;
+    }
+    hr {
+      margin: 4rem 0;
     }
   }
   @media ${breakPoint.mobile} {
@@ -238,7 +245,6 @@ export const MdViewCT = styled.div`
           max-width: 87vw;
           overflow: scroll;
           padding: 16px !important;
-          /* background-color: rgb(46, 52, 64) !important; */
         }
       }
       h1,
@@ -281,7 +287,7 @@ export const MdViewCT = styled.div`
           line-height: 1.5;
         }
       }
-      a {
+      p a {
         font-size: 14px;
         svg {
           padding-top: 4px;
@@ -331,8 +337,26 @@ export const MdViewCT = styled.div`
       h2,
       h3,
       h4 {
-        margin: 3rem 0 0.5rem;
+        margin: 2.5rem 0 0.5rem;
         font-weight: 700;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      h2 {
+        font-size: 1.55rem;
+      }
+      h3 {
+        font-size: 1.25rem;
+      }
+      h4 {
+        font-size: 1rem;
+      }
+      h5 {
+        font-size: 0.9rem;
+      }
+      h6 {
+        font-size: 0.8rem;
       }
       & > pre {
         display: none;
@@ -349,12 +373,15 @@ export const MdViewCT = styled.div`
       }
       p {
         text-align: start;
-        font-size: 18px;
-        line-height: 1.9;
+        font-size: 15px;
+        line-height: 1.85;
         /* line-break: strict; */
       }
       img {
         width: 100%;
+      }
+      hr {
+        margin: 3rem 0;
       }
     }
   }

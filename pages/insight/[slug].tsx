@@ -11,6 +11,7 @@ import getQueryClient from 'modules/query/queryClient';
 import { db } from 'libs/db';
 import { dehydrate } from '@tanstack/react-query';
 import MetaHead from 'components/common/MetaHead';
+import Link from 'next/link';
 
 export default function Post() {
   const { query } = useRouter();
@@ -23,6 +24,15 @@ export default function Post() {
         {data ? (
           <InsightPostPage>
             <div className="inner">
+              <ul className="category">
+                {data?.categories?.map((v, idx) => (
+                  <li key={idx}>
+                    <Link href={`/category/${v.slug}`} title={v.name}>
+                      # {v.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
               <h1 className="title">{data?.title}</h1>
               <ul className="detail">
                 <li>

@@ -66,18 +66,27 @@ export const SimpleListItem = styled.div`
     }
   }
   @media ${breakPoint.mobile} {
-    gap: 8px;
-    flex-direction: column-reverse;
-    align-items: flex-start;
+    & > a {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      gap: 8px;
+    }
     margin-bottom: 48px;
     article {
+      & > ul {
+        gap: 8px;
+        li {
+          margin-bottom: 0px;
+          font-size: 13px;
+        }
+      }
       h2 {
-        font-size: 26px;
+        font-size: 22px;
         line-height: 1.4;
       }
       p {
-        font-size: 14px;
-        margin-top: 8px;
+        font-size: 13px;
+        margin-top: 6px;
         .dot {
           margin: 6px;
         }
@@ -116,6 +125,7 @@ export const PostItemBox = styled.div`
       font-size: 28px;
       font-weight: 700;
       line-height: 1.4;
+      /* margin-top: 0; */
     }
     p.summary {
       flex: 1;

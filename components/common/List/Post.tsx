@@ -10,7 +10,7 @@ type PostItemProps = {
 };
 export default function PostItem({ data }: PostItemProps) {
   return (
-    <Link href={`/dev/${data.slug}`}>
+    <Link href={`/dev/${data.slug}`} title={data.title || ''}>
       <PostItemBox className="post_summary">
         <div className="article">
           <h2>{data.title}</h2>

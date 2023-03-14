@@ -14,14 +14,14 @@ export const InsightPage = styled.main`
       font-weight: 800;
       svg {
         margin-left: 12px;
-        transform: translate(0px, 2px);
+        transform: translate(0px, 3px);
       }
     }
     p {
-      margin-top: 12px;
+      margin-top: 16px;
       font-size: 20px;
       line-height: 1.4;
-      font-weight: 600;
+      font-weight: 500;
       color: #555;
     }
   }

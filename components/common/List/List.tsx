@@ -10,13 +10,18 @@ type ListItemProps = {
 export default function ListItem({ data }: ListItemProps) {
   return (
     <SimpleListItem>
-      <Link href={`/insight/${data.slug}`}>
+      <Link
+        href={`/${data.type === 1 ? 'insight' : 'dev'}/${data.slug}`}
+        title={data.title || ''}
+      >
         <article>
           <ul>
             {data.categories?.map((cate, idx) =>
               idx < 3 ? (
                 <li key={cate.slug}>
-                  {<Link href={`/category/${cate.slug}`}># {cate.name}</Link>}
+                  <Link href={`/category/${cate.slug}`} title={cate.name || ''}>
+                    # {cate.name}
+                  </Link>
                 </li>
               ) : null
             )}

@@ -8,13 +8,16 @@ import { InsightPostPage, PostCT } from 'styles/postStyles';
 import { supaStorage } from 'libs/storage';
 import PostInfoForm from './PostInfoForm';
 import { FloatButton, notification } from 'antd';
-import { HiUpload } from 'react-icons/hi';
+import { HiPencil, HiUpload } from 'react-icons/hi';
 import { usePostFormStore } from 'modules/zustand/PostForm';
 import { postQ } from 'modules/query/post';
+import { useRouter } from 'next/router';
 
 export default function MdEditer() {
+  const { query } = useRouter();
   const input = useRef<HTMLInputElement>(null);
-  const { mutateAsync } = postQ.addPost();
+  const { mutateAsync: submitMutate } = postQ.addPost();
+  const { mutateAsync: updateMutate } = postQ.updatePost();
   const postForm = usePostFormStore();
   const { type, content, updateState } = postForm;
 
@@ -37,13 +40,13 @@ export default function MdEditer() {
     }
   };
   const onSubmit = async () => {
-    const res = await mutateAsync({
+    const payload = {
       categories: postForm.categories,
       post: {
         slug: postForm.slug,
         content: content,
         cover_horizontal: postForm.cover_horizontal,
-        cover_vertical: type === 'dev' ? null : postForm.cover_vertical,
+        cover_vertical: postForm.cover_vertical || null,
         description: postForm.description,
         published_at: postForm.published_at.toUTCString(),
         read_time: postForm.read_time,
@@ -51,13 +54,25 @@ export default function MdEditer() {
         type: postForm.type === 'dev' ? 2 : 1,
         keywords: postForm.keywords,
       },
-    });
-    if (res) {
-      notification.open({
-        type: 'success',
-        message: '작성 완료',
-        description: '작성이 완료되었습니다..',
-      });
+    };
+    if (query.slug && query.slug !== 'new') {
+      const res = await updateMutate(payload);
+      if (res) {
+        notification.open({
+          type: 'success',
+          message: '수정완료',
+          description: '수정이 완료되었습니다..',
+        });
+      }
+    } else {
+      const res = await submitMutate(payload);
+      if (res) {
+        notification.open({
+          type: 'success',
+          message: '작성 완료',
+          description: '작성이 완료되었습니다..',
+        });
+      }
     }
   };
 
@@ -114,7 +129,7 @@ export default function MdEditer() {
         style={{ width: 52, height: 52 }}
         shape="circle"
         type="primary"
-        icon={<HiUpload />}
+        icon={query.slug && query.slug !== 'new' ? <HiPencil /> : <HiUpload />}
         onClick={onSubmit}
       />
     </MdEditorCT>

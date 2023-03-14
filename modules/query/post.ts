@@ -42,4 +42,13 @@ export const postQ = {
         getQueryClient.refetchQueries({ queryKey: postKeys.listFilter() });
       },
     }),
+  updatePost: () =>
+    useMutation({
+      mutationFn: (payload: { post: Post; categories: number[] }) => {
+        return db.post.update(payload);
+      },
+      onSuccess: () => {
+        getQueryClient.refetchQueries({ queryKey: postKeys.listFilter() });
+      },
+    }),
 };

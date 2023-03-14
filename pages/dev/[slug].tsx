@@ -12,6 +12,7 @@ import { dehydrate } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
 import { db } from 'libs/db';
 import MetaHead from 'components/common/MetaHead';
+import Link from 'next/link';
 
 export default function Post() {
   const { query } = useRouter();
@@ -29,7 +30,11 @@ export default function Post() {
               <div className="info">
                 <ul className="category_list">
                   {data.categories?.map((v, idx) => (
-                    <li key={idx}>{v.name}</li>
+                    <li key={idx}>
+                      <Link href={`/category/${v.slug}`} title={v.name}>
+                        {v.name}
+                      </Link>
+                    </li>
                   ))}
                 </ul>
                 <ul className="detail">

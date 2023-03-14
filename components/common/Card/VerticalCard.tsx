@@ -9,7 +9,7 @@ type VerticalCardProps = {
 };
 export default function VerticalCard({ data }: VerticalCardProps) {
   return (
-    <Link href={`/insight/${data.slug}`}>
+    <Link href={`/insight/${data.slug}`} title={data.title || ''}>
       <VerticalCardBox>
         <img
           alt={data.title || ''}
