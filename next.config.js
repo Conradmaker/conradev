@@ -7,6 +7,14 @@ const nextConfig = {
     esmExternals: 'loose',
     appDir: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/api/sitemap',
+      },
+    ];
+  },
 };
 
 module.exports = removeImports(nextConfig);

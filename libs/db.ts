@@ -180,7 +180,18 @@ export const getCategorySearchResult =
       throw new Error('');
     }
   };
-
+const getSitemapPost = async (): Promise<Post[]> => {
+  try {
+    const result = await supabase
+      .from('posts')
+      .select('slug,type')
+      .order('published_at', { ascending: false });
+    return (result.data as Post[]) || [];
+  } catch (e) {
+    console.error(e);
+    throw new Error('');
+  }
+};
 export const db = {
   category: {
     getList: getCategoryListFetcher,
@@ -195,5 +206,8 @@ export const db = {
   search: {
     keyword: getKeywordSearchResult,
     category: getCategorySearchResult,
+  },
+  sitemap: {
+    post: getSitemapPost,
   },
 };

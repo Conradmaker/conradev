@@ -26,6 +26,7 @@
     "lodash": "^4.17.21",
     "next": "13.2.2",
     "next-remove-imports": "^1.0.10",
+    "prettier": "^2.8.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@types/lodash": "^4.14.191",
     "@types/node": "18.0.0",
+    "@types/prettier": "^2.7.2",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
     "@types/react-syntax-highlighter": "^15.5.2",
@@ -47,7 +49,6 @@
     "eslint": "8.17.0",
     "eslint-config-next": "12.1.6",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.7.1",
     "typescript": "4.7.3"
   }
 }

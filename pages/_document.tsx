@@ -26,6 +26,10 @@ class MyDocument extends Document {
             href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
             rel="stylesheet"
           ></link>
+          <meta
+            name="naver-site-verification"
+            content="f84e0e162a641e321d3dcaef5cfc0c8d66fe8755"
+          />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <body>
