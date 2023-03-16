@@ -60,14 +60,16 @@ export const MdViewCT = styled.div`
     padding-top: 60px;
     margin-bottom: 120px;
     margin: 0 auto;
-
+    background-color: #fff;
     h1,
     h2,
     h3,
     h4 {
+      color: #111;
       margin: 3.5rem 0 0.5rem;
       font-weight: inherit;
       line-height: 1.42;
+      border-color: #cfd7dd;
     }
     h1 {
       font-weight: 500;
@@ -161,6 +163,7 @@ export const MdViewCT = styled.div`
     }
     hr {
       margin: 5rem 0;
+      background-color: #cfd7dd;
     }
   }
   .markdown-body.insight {
