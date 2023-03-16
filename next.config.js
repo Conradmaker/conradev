@@ -5,7 +5,7 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     esmExternals: 'loose',
-    appDir: true,
+    // appDir: true,
   },
   async rewrites() {
     return [
