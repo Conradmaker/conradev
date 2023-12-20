@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const formatted = (sitemap: string) => prettier.format(sitemap, { parser: 'html' });
 
   const { data } = await axios.get<{ slug: string; type: number }[]>(
-    `${process.env.API_HOST}/api/posts/sitemap`
+    `${process.env.NEXT_PUBLIC_API_HOST}/api/posts/sitemap`
   );
   const postListSitemap = `
   ${data

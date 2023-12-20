@@ -74,18 +74,19 @@ export const HorizontalCardBox = styled(VerticalCardBox)<{
     .tag_list {
       display: flex;
       align-items: center;
+      gap: 4px;
       .tag {
         cursor: pointer;
-        height: 20px;
+        height: 24px;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 2px 8px;
-        border: 1px solid #fff;
-        border-radius: 24px;
+        border: 1px solid #666;
+        border-radius: 12px;
         color: #fff;
         font-weight: 300;
-        font-size: 12px;
+        font-size: 13px;
         transition: all 0.2s;
         &:hover {
           background-color: #fff;
