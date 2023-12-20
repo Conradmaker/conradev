@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React from 'react';
 import { FcCommandLine } from 'react-icons/fc';
 import PostItem from 'src/components/common/List/Post';
-import MetaHead from 'src/components/common/MetaHead';
 import { categoryKeys, categoryListFetcher } from 'src/modules/query/category';
 import { postKeys, postListFetcher } from 'src/modules/query/post';
 import { DevPage } from 'src/styles/mainStyles';
@@ -20,11 +19,6 @@ export default function DevPostList() {
   });
   return (
     <>
-      <MetaHead.Default
-        title="개발"
-        description="개발에 대한 경험을 생각하고 기록하고 공유합니다."
-        url="https://www.conradev.me/dev/"
-      />
       <DevPage className="inner">
         <div className="head">
           <div>

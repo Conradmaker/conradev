@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FcSearch } from 'react-icons/fc';
 import ListItem from 'src/components/common/List/List';
-import MetaHead from 'src/components/common/MetaHead';
 import { categoryDetailFetcher, categoryKeys } from 'src/modules/query/category';
 import { InsightPage } from 'src/styles/mainStyles';
 
@@ -14,11 +13,6 @@ export default function CategoryDetail({ slug }: { slug: string }) {
   });
   return (
     <>
-      <MetaHead.Default
-        title={data?.category.name || ''}
-        description="검색결과"
-        url="https://www.conradev.me/category/"
-      />
       <InsightPage className="inner">
         <div className="head">
           <div>

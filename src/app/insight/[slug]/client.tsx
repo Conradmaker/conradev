@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import React from 'react';
 import { HiOutlineCalendar, HiOutlineClock } from 'react-icons/hi';
-import MetaHead from 'src/components/common/MetaHead';
 import MdView from 'src/components/Post/MdView';
 import { postDetailFetcher, postKeys } from 'src/modules/query/post';
 import { InsightPostPage } from 'src/styles/postStyles';
@@ -16,7 +15,6 @@ export default function InsightPostDetail({ slug }: { slug: string }) {
   });
   return (
     <>
-      <MetaHead data={data} />
       {data ? (
         <InsightPostPage>
           <div className="inner">

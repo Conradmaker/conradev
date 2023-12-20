@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import React from 'react';
 import { HiOutlineCalendar, HiOutlineClock } from 'react-icons/hi';
-import MetaHead from 'src/components/common/MetaHead';
 import MdView from 'src/components/Post/MdView';
 // import useHeadAnchor from 'src/hooks/useHeadAnchor';
 import { postDetailFetcher, postKeys } from 'src/modules/query/post';
@@ -18,7 +17,6 @@ export default function DevPostDetail({ slug }: { slug: string }) {
   //   const { idList } = useHeadAnchor([data?.content]);
   return (
     <>
-      <MetaHead data={data} />
       {data ? (
         <PostCT>
           <div className="inner">

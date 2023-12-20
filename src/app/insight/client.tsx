@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FcIdea } from 'react-icons/fc';
 import ListItem from 'src/components/common/List/List';
-import MetaHead from 'src/components/common/MetaHead';
 import { postKeys, postListFetcher } from 'src/modules/query/post';
 import { InsightPage } from 'src/styles/mainStyles';
 
@@ -14,11 +13,6 @@ export default function InsightPostList() {
   });
   return (
     <>
-      <MetaHead.Default
-        title="인사이트"
-        description="여러가지 주제에 대한 생각을 기록합니다."
-        url="https://www.conradev.me/insight/"
-      />
       <InsightPage className="inner">
         <div className="head">
           <div>
