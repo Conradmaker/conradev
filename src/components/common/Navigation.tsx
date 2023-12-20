@@ -11,6 +11,7 @@ export default function Navigation() {
   const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
 
+  if (pathname?.startsWith('/edit')) return <></>;
   return (
     <NavigationBox>
       <div className="inner">

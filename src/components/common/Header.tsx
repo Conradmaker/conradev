@@ -1,9 +1,12 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 import { HeaderBox } from './styles';
 
 export default function Header() {
+  const pathname = usePathname();
+  if (pathname?.startsWith('/edit')) return <></>;
   return (
     <HeaderBox className="inner">
       <Link href="/">

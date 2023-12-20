@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Input, Modal } from 'antd';
-import { categoryQ } from 'src/modules/query/category';
 import { usePostFormStore } from 'src/modules/zustand/PostForm';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { categoryKeys, createCategoryFetcher } from 'src/modules/query/category';
 
 type CategoryModalProps = {
   open: boolean;
@@ -10,10 +11,17 @@ type CategoryModalProps = {
 export default function CategoryModal({ open, onClose }: CategoryModalProps) {
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
+  const queryClient = useQueryClient();
   const { type } = usePostFormStore();
-  const { mutate } = categoryQ.addCategory();
+  const { mutate } = useMutation({ mutationFn: createCategoryFetcher });
   const onSubmit = async () => {
-    mutate({ name, slug, type: type === 'insight' ? 1 : 2 });
+    mutate(
+      { name, slug, type: type === 'insight' ? 1 : 2 },
+      {
+        onSettled: () =>
+          queryClient.refetchQueries({ queryKey: categoryKeys.list({ type: 'all' }) }),
+      }
+    );
     onClose();
   };
 

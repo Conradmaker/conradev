@@ -1,4 +1,3 @@
-'use client';
 import styled from '@emotion/styled';
 import { breakPoint } from 'src/styles/theme';
 
@@ -11,13 +10,13 @@ export const SimpleListItem = styled.div`
   margin-bottom: 44px;
   cursor: pointer;
   &:hover {
-    article {
+    .summary {
       h2 {
         opacity: 0.6;
       }
     }
   }
-  article {
+  .summary {
     flex: 1;
     & > ul {
       display: flex;

@@ -1,54 +1,44 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useMutation, useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { db } from 'src/libs/db';
-import getQueryClient from './queryClient';
-import { Filter, Post } from './types';
+import { FetchQueryOptions, MutationFunction } from '@tanstack/react-query';
+import axios, { AxiosError } from 'axios';
+import { Post, PostPayload } from './types';
 
-export type PostFilter = {
+export type PostListFilter = {
   type?: 'insight' | 'dev' | 'all';
-} & Filter;
+  page?: number;
+  limit?: number;
+};
 export const postKeys = {
-  all: ['post'] as const,
-  list: () => [...postKeys.all, 'list'] as const,
-  listFilter: (filters?: PostFilter) => [...postKeys.list(), filters || null] as const,
-  detail: (id: string) => [...postKeys.all, id] as const,
+  list: (filters?: PostListFilter) => ['/posts', filters] as const,
+  detail: (postId: string) => [`/posts/${postId}`] as const,
 };
-export const postQ = {
-  getPostList: (
-    filter?: PostFilter,
-    opt?: UseQueryOptions<
-      Promise<Post[]>,
-      Error,
-      Post[],
-      ReturnType<(typeof postKeys)['listFilter']>
-    >
-  ) => useQuery(postKeys.listFilter(filter), db.post.getList(filter), opt),
+type PostKeys = typeof postKeys;
 
-  getPostDetail: (
-    slug: string,
-    opt?: UseQueryOptions<
-      Promise<Post>,
-      Error,
-      Post,
-      ReturnType<(typeof postKeys)['detail']>
-    >
-  ) => useQuery(postKeys.detail(slug), db.post.getDetail(slug), opt),
-  addPost: () =>
-    useMutation({
-      mutationFn: (payload: { post: Post; categories: number[] }) => {
-        return db.post.add(payload);
-      },
-      onSuccess: () => {
-        getQueryClient.refetchQueries({ queryKey: postKeys.listFilter() });
-      },
-    }),
-  updatePost: () =>
-    useMutation({
-      mutationFn: (payload: { post: Post; categories: number[] }) => {
-        return db.post.update(payload);
-      },
-      onSuccess: () => {
-        getQueryClient.refetchQueries({ queryKey: postKeys.listFilter() });
-      },
-    }),
-};
+export const postListFetcher = async ({
+  queryKey,
+}: FetchQueryOptions<unknown, AxiosError, unknown, ReturnType<PostKeys['list']>>) =>
+  await axios
+    .get<Post[]>(`${process.env.NEXT_PUBLIC_API_HOST}/api${queryKey[0]}`, {
+      params: queryKey[1],
+    })
+    .then(res => res.data);
+
+export const postDetailFetcher = async ({
+  queryKey,
+}: FetchQueryOptions<unknown, AxiosError, unknown, ReturnType<PostKeys['detail']>>) =>
+  await axios
+    .get<Post>(`${process.env.NEXT_PUBLIC_API_HOST}/api${queryKey[0]}`, {})
+    .then(res => res.data);
+
+export const createPostFetcher: MutationFunction<Post, PostPayload> = data =>
+  axios
+    .post<Post>(`${process.env.NEXT_PUBLIC_API_HOST}/api/posts`, data)
+    .then(res => res.data);
+
+export const updatePostFetcher: MutationFunction<
+  Post,
+  Partial<PostPayload> & { slug: string }
+> = data =>
+  axios
+    .patch<Post>(`${process.env.NEXT_PUBLIC_API_HOST}/api/posts/${data.slug}`, data)
+    .then(res => res.data);

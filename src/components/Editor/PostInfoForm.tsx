@@ -1,11 +1,12 @@
 import { Button, DatePicker, Form, Input, InputNumber, Radio, Select } from 'antd';
 import dayjs from 'dayjs';
 import { supaStorage } from 'src/libs/storage';
-import { categoryQ } from 'src/modules/query/category';
 import { usePostFormStore } from 'src/modules/zustand/PostForm';
 import React, { useRef, useState } from 'react';
 import { HiOutlineCalendar, HiOutlineClock } from 'react-icons/hi';
 import CategoryModal from './CategoryModal';
+import { useQuery } from '@tanstack/react-query';
+import { categoryKeys, categoryListFetcher } from 'src/modules/query/category';
 export default function InsightForm() {
   const {
     type,
@@ -23,7 +24,10 @@ export default function InsightForm() {
   const vCover = useRef<HTMLInputElement>(null);
   const hCover = useRef<HTMLInputElement>(null);
   const [categoryOpen, setCategoryOpen] = useState(false);
-  const { data: categoryList } = categoryQ.getCategoryList({ type });
+  const { data: categoryList } = useQuery({
+    queryKey: categoryKeys.list({ type: 'all' }),
+    queryFn: categoryListFetcher,
+  });
 
   return (
     <>

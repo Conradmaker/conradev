@@ -1,10 +1,15 @@
-import { categoryQ } from 'src/modules/query/category';
+'use client';
+import { categoryKeys, categoryListFetcher } from 'src/modules/query/category';
 import Link from 'next/link';
 import React from 'react';
 import { CategoryListCT } from './styles';
+import { useQuery } from '@tanstack/react-query';
 
 export default function CategoryList() {
-  const { data } = categoryQ.getCategoryList();
+  const { data } = useQuery({
+    queryKey: categoryKeys.list({ type: 'all' }),
+    queryFn: categoryListFetcher,
+  });
   return (
     <CategoryListCT className="category_list">
       <ul className="inner">

@@ -1,56 +1,23 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { db } from 'src/libs/db';
-import { Category, Post } from './types';
+import { FetchQueryOptions } from '@tanstack/react-query';
+import axios, { AxiosError } from 'axios';
+import { KeywordSearchRes } from './types';
 
 export type SearchFilter = {
   keyword: { keyword: string };
   category: { slug: string };
 };
 export const searchKeys = {
-  all: ['search'] as const,
-  list: () => [...searchKeys.all, 'list'] as const,
-  listFilter: (filters?: SearchFilter['category'] | SearchFilter['keyword']) =>
-    [...searchKeys.list(), filters || null] as const,
-};
-export const searchQ = {
-  getKeywordSearch: (
-    filter?: SearchFilter['keyword'],
-    opt?: UseQueryOptions<
-      Promise<{
-        insight: Array<Pick<Post, 'id' | 'title' | 'slug'>>;
-        dev: Array<Pick<Post, 'id' | 'title' | 'slug'>>;
-        category: Array<Pick<Category, 'id' | 'slug'> & { title: string }>;
-      }>,
-      Error,
-      {
-        insight: Array<Pick<Post, 'id' | 'title' | 'slug'>>;
-        dev: Array<Pick<Post, 'id' | 'title' | 'slug'>>;
-        category: Array<Pick<Category, 'id' | 'slug'> & { title: string }>;
-      },
-      ReturnType<(typeof searchKeys)['listFilter']>
-    >
-  ) => useQuery(searchKeys.listFilter(filter), db.search.keyword(filter), opt),
+  keyword: (filters?: SearchFilter['keyword']) => ['/search/keyword', filters],
+  category: (filters?: SearchFilter['category']) => ['/search/category', filters],
+} as const;
 
-  getCategorySearch: (
-    filter: SearchFilter['category'],
-    opt?: UseQueryOptions<
-      Promise<{
-        post: Array<Post & { categories: Category[] }>;
-        category: Category;
-      }>,
-      Error,
-      {
-        post: Array<Post & { categories: Category[] }>;
-        category: Category;
-      },
-      ReturnType<(typeof searchKeys)['listFilter']>
-    >
-  ) =>
-    useQuery({
-      queryKey: searchKeys.listFilter(filter),
-      queryFn: db.search.category(filter),
-      ...opt,
-    }),
-  // ) => useQuery(searchKeys.listFilter(filter), db.search.category(filter), { opt }),
-};
+type SearchKeys = typeof searchKeys;
+
+export const keywordSearchFetcher = async ({
+  queryKey,
+}: FetchQueryOptions<unknown, AxiosError, unknown, ReturnType<SearchKeys['keyword']>>) =>
+  await axios
+    .get<KeywordSearchRes>(`${process.env.NEXT_PUBLIC_API_HOST}/api${queryKey[0]}`, {
+      params: queryKey[1],
+    })
+    .then(res => res.data);

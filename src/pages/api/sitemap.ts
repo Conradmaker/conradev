@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prettier from 'prettier';
-import { db } from 'src/libs/db';
+import axios from 'axios';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const getDate = new Date().toISOString();
@@ -9,9 +9,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   res.setHeader('Content-Type', 'text/xml');
   const formatted = (sitemap: string) => prettier.format(sitemap, { parser: 'html' });
 
-  const result = await db.sitemap.post();
+  const { data } = await axios.get<{ slug: string; type: number }[]>(
+    `${process.env.API_HOST}/api/posts/sitemap`
+  );
   const postListSitemap = `
-  ${result
+  ${data
     .map(post => {
       return `
         <url>

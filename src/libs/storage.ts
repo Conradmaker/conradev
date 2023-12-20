@@ -1,5 +1,9 @@
-import { supabase } from './supabaseClient';
+import { createClient } from '@supabase/supabase-js';
 
+export const supabase = createClient(
+  `https://${process.env.NEXT_PUBLIC_SPB_APP_ID}.supabase.co`,
+  process.env.NEXT_PUBLIC_SPB_APP_SECRET as string
+);
 const getFileName = (fileName: string) => {
   return new Date().getTime() + '.' + fileName.split('.')[fileName.split('.').length - 1];
 };

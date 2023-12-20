@@ -24,7 +24,15 @@ const initialState: Omit<FormState, 'updateState'> = {
   content: '',
   cover_horizontal: '',
   cover_vertical: null,
-  keywords: '',
+  keywords: [
+    '개발',
+    '프로그래밍',
+    '코딩',
+    '프론트엔드',
+    '백엔드',
+    '스타트업',
+    '기술블로그',
+  ].join(','),
   published_at: new Date(),
   read_time: 0,
 };

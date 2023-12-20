@@ -1,3 +1,4 @@
+'use client';
 import dayjs from 'dayjs';
 import { Post } from 'src/modules/query/types';
 import Link from 'next/link';
@@ -14,7 +15,7 @@ export default function ListItem({ data }: ListItemProps) {
         href={`/${data.type === 1 ? 'insight' : 'dev'}/${data.slug}`}
         title={data.title || ''}
       >
-        <article>
+        <div className="summary">
           <ul>
             {data.categories?.map((cate, idx) =>
               idx < 3 ? (
@@ -34,7 +35,7 @@ export default function ListItem({ data }: ListItemProps) {
             <div className="dot"></div>
             <span className="cnt">{data.read_time}분 분량</span>
           </p>
-        </article>
+        </div>
         <div className="img_wrapper">
           <img
             src={data.cover_horizontal || ''}

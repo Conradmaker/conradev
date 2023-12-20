@@ -1,12 +1,9 @@
 'use client';
-// import { dehydrate } from '@tanstack/react-query';
-// import { db } from 'src/libs/db';
-import { postQ } from 'src/modules/query/post';
-// import getQueryClient from 'src/modules/query/queryClient';
 import { usePostFormStore } from 'src/modules/zustand/PostForm';
-// import { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 import React, { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { postDetailFetcher, postKeys } from 'src/modules/query/post';
 
 const MDEditor = dynamic(() => import('../../../components/Editor/MdEditer'), {
   ssr: false,
@@ -15,9 +12,12 @@ const MDEditor = dynamic(() => import('../../../components/Editor/MdEditer'), {
 
 export default function Index({ params }: { params: { slug: string } }) {
   const { updateState } = usePostFormStore();
-  const { data } = postQ.getPostDetail((params.slug as string) || '', {
+  const { data } = useQuery({
+    queryKey: postKeys.detail(params.slug),
+    queryFn: postDetailFetcher,
     enabled: params.slug !== undefined && params.slug !== 'new',
   });
+
   useEffect(() => {
     if (!data) return;
     updateState({
@@ -27,7 +27,17 @@ export default function Index({ params }: { params: { slug: string } }) {
       description: data.description || '',
       cover_horizontal: data.cover_horizontal || '',
       cover_vertical: data.cover_vertical || '',
-      keywords: data.keywords || '',
+      keywords:
+        data.keywords ||
+        [
+          '개발',
+          '프로그래밍',
+          '코딩',
+          '프론트엔드',
+          '백엔드',
+          '스타트업',
+          '기술블로그',
+        ].join(','),
       published_at: data.published_at ? new Date(data.published_at) : new Date(),
       read_time: data.read_time || 0,
       type: data.type === 1 ? 'insight' : 'dev',
@@ -41,16 +51,3 @@ export default function Index({ params }: { params: { slug: string } }) {
     </div>
   );
 }
-
-// export const getServerSideProps: GetServerSideProps = async ctx => {
-//   const queryClient = getQueryClient;
-//   if (ctx.params?.slug && ctx.params.slug !== 'new') {
-//     const slug = ctx.params.slug as string;
-//     await queryClient.prefetchQuery(postKeys.detail(slug), db.post.getDetail(slug));
-//   }
-//   return {
-//     props: {
-//       dehydratedQuery: dehydrate(queryClient),
-//     },
-//   };
-// };

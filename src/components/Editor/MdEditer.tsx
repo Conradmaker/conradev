@@ -10,15 +10,15 @@ import PostInfoForm from './PostInfoForm';
 import { FloatButton, notification } from 'antd';
 import { HiPencil, HiUpload } from 'react-icons/hi';
 import { usePostFormStore } from 'src/modules/zustand/PostForm';
-import { postQ } from 'src/modules/query/post';
-import { useSearchParams } from 'next/navigation';
+import { useMutation } from '@tanstack/react-query';
+import { createPostFetcher, updatePostFetcher } from 'src/modules/query/post';
+import { useParams } from 'next/navigation';
 
 export default function MdEditer() {
-  const searchParams = useSearchParams();
-  const slug = searchParams?.get('slug') || null;
+  const { slug } = useParams<{ slug: string }>() as { slug: string };
   const input = useRef<HTMLInputElement>(null);
-  const { mutateAsync: submitMutate } = postQ.addPost();
-  const { mutateAsync: updateMutate } = postQ.updatePost();
+  const { mutateAsync: submitMutate } = useMutation({ mutationFn: createPostFetcher });
+  const { mutateAsync: updateMutate } = useMutation({ mutationFn: updatePostFetcher });
   const postForm = usePostFormStore();
   const { type, content, updateState } = postForm;
 
@@ -42,19 +42,17 @@ export default function MdEditer() {
   };
   const onSubmit = async () => {
     const payload = {
+      slug: postForm.slug,
+      title: postForm.title,
+      description: postForm.description,
+      content: content,
+      cover_horizontal: postForm.cover_horizontal,
+      cover_vertical: postForm.cover_vertical || '',
+      published_at: postForm.published_at,
+      read_time: postForm.read_time,
+      type: postForm.type === 'dev' ? 2 : 1,
+      keywords: postForm.keywords,
       categories: postForm.categories,
-      post: {
-        slug: postForm.slug,
-        content: content,
-        cover_horizontal: postForm.cover_horizontal,
-        cover_vertical: postForm.cover_vertical || null,
-        description: postForm.description,
-        published_at: postForm.published_at.toUTCString(),
-        read_time: postForm.read_time,
-        title: postForm.title,
-        type: postForm.type === 'dev' ? 2 : 1,
-        keywords: postForm.keywords,
-      },
     };
     if (slug && slug !== 'new') {
       const res = await updateMutate(payload);

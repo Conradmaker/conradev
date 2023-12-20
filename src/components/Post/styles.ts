@@ -147,13 +147,20 @@ export const MdViewCT = styled.div`
       }
     }
     ul,
+    ol,
     dl {
+      color: #444;
+      padding-left: 24px;
       list-style: circle;
       font-weight: 300;
       line-height: 2;
+      margin: 24px 0 24px 0;
       li {
-        margin: 8px 0;
+        margin: 4px 0;
       }
+    }
+    ol {
+      list-style: decimal;
     }
     img {
       width: 100%;

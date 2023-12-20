@@ -2,26 +2,10 @@ import { AutoComplete, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import _debounce from 'lodash/debounce';
 import { OmniBarCT } from './styles';
-import { searchQ } from 'src/modules/query/search';
 import Link from 'next/link';
+import { useQuery } from '@tanstack/react-query';
+import { keywordSearchFetcher, searchKeys } from 'src/modules/query/search';
 const renderTitle = (title: string) => <span>{title}</span>;
-const renderItem = (title: string, slug: string) => ({
-  value: slug,
-  label: (
-    <Link href={slug} title={title}>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          fontSize: 16,
-          padding: '4px 0',
-        }}
-      >
-        {title}
-      </div>
-    </Link>
-  ),
-});
 
 type OmniBarProps = {
   open: boolean;
@@ -39,20 +23,42 @@ export default function OmniBar({ open, onClose }: OmniBarProps) {
   >([]);
   const [keyword, setKeyword] = useState('');
   const [startEl, setStartEl] = useState<EventTarget | null>(null);
-  const { data, isLoading } = searchQ.getKeywordSearch({ keyword: keyword });
+  const { data, isFetching } = useQuery({
+    queryKey: searchKeys.keyword({ keyword }),
+    queryFn: keywordSearchFetcher,
+    enabled: !!keyword,
+  });
   useEffect(() => {
     if (!data) return;
     setOptions(
       Object.entries(data)
         .map(([key, value]) => ({
           label: renderTitle(key),
-          options: value.map(v =>
-            renderItem(v.title || '', v.slug ? `/${key}/${v.slug}` : '')
-          ),
+          options: value.map(v => ({
+            value: v.slug + '',
+            label: (
+              <Link
+                href={v.slug ? `/${key}/${v.slug}` : ''}
+                title={v.title || ''}
+                onClick={onClose}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    fontSize: 16,
+                    padding: '4px 0',
+                  }}
+                >
+                  {v.title || ''}
+                </div>
+              </Link>
+            ),
+          })),
         }))
         .filter(v => v.options.length)
     );
-  }, [data]);
+  }, [data, onClose]);
 
   const onClickBG = (e: React.MouseEvent) => {
     if (e.currentTarget === startEl) {
@@ -81,7 +87,7 @@ export default function OmniBar({ open, onClose }: OmniBarProps) {
         size="large"
       >
         <Input.Search
-          loading={isLoading}
+          loading={isFetching}
           onChange={e => onChangeKeyword(e.target.value)}
           size="large"
           placeholder="검색어를 입력해주세요."

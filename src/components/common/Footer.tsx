@@ -1,9 +1,13 @@
 'use client';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FooterCT } from './styles';
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname?.startsWith('/edit')) return <></>;
   return (
     <FooterCT className="inner">
       <p>Won Geun Yoo &copy; 2022</p>
